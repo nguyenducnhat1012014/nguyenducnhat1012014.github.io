@@ -98,7 +98,7 @@
       flex-wrap: wrap;
     }
     .nav-links a {
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       font-weight: 600;
       color: var(--muted);
       text-decoration: none;
@@ -111,15 +111,26 @@
       color: var(--text);
       padding: 6px 12px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
     }
-        .container {
+    .container {
       width: 100%;
       max-width: 944px;
       margin: 0 auto;
       padding: 24px 12px 64px;
+    }
+
+    /* Hiệu ứng xuất hiện mượt mà khi cuộn trang */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .hero-card {
@@ -162,7 +173,27 @@
     }
     .cursor { display: inline-block; width: 2px; background-color: #38bdf8; animation: blink 0.8s infinite; }
     @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-    .hero-desc { color: #cbd5e1; font-size: 1.04rem; max-width: 640px; margin-bottom: 28px; }
+    .hero-desc { color: #cbd5e1; font-size: 1.04rem; max-width: 650px; margin-bottom: 28px; }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    @media (min-width: 720px) {
+      .stats-bar { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat-item {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+    .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 1.15rem; font-weight: 700; color: #38bdf8; display: block; }
+    .stat-label { font-size: 0.82rem; color: #cbd5e1; }
 
     .section-card {
       background: var(--surface);
@@ -304,6 +335,7 @@
       <div class="nav-links">
         <a href="#cau-chuyen">Câu chuyện</a>
         <a href="#ky-nang">Kỹ năng</a>
+        <a href="#so-thich">Sở thích</a>
         <a href="#lo-trinh">Lộ trình</a>
         <a href="#hoi-dap">Hỏi đáp</a>
         <a href="#lien-lac">Liên hệ</a>
@@ -324,9 +356,28 @@
         <a href="#lo-trinh" class="btn btn-glow">Xem lộ trình ước mơ</a>
         <a href="#gui-loi-nhan" class="btn btn-glass">Gửi lời nhắn cho Nhật</a>
       </div>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="stat-num">Lớp 7</span>
+          <span class="stat-label">TH&THCS Phúc Đồng</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">VioEdu</span>
+          <span class="stat-label">Mục tiêu Quốc gia</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">Toán & IT</span>
+          <span class="stat-label">Đam mê cốt lõi</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Kỷ luật & Kiên trì</span>
+        </div>
+      </div>
     </section>
 
-    <section id="cau-chuyen" class="section-card">
+    <section id="cau-chuyen" class="section-card reveal">
       <span class="eyebrow">01 · CÂU CHUYỆN</span>
       <h2>Tôi là ai</h2>
       <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại trường TH&THCS Phúc Đồng. Tôi thích tư duy logic của Toán học và luôn tò mò về cách thế giới công nghệ vận hành.</p>
@@ -349,7 +400,7 @@
       </div>
     </section>
 
-    <section id="ky-nang" class="section-card">
+    <section id="ky-nang" class="section-card reveal">
       <span class="eyebrow">02 · NĂNG LỰC & KỸ NĂNG</span>
       <h2>Hành trang tôi đang rèn luyện</h2>
       <p class="section-desc">Kết hợp giữa kiến thức Công nghệ thông tin, tư duy Toán học và tinh thần kỷ luật để hướng tới mục tiêu tương lai.</p>
@@ -383,8 +434,50 @@
       </div>
     </section>
 
-    <section id="lo-trinh" class="section-card">
-      <span class="eyebrow">03 · LỘ TRÌNH CHINH PHỤC ƯỚC MƠ</span>
+    <section id="so-thich" class="section-card reveal">
+      <span class="eyebrow">03 · GÓC SỞ THÍCH & ĐAM MÊ</span>
+      <h2>Những điều làm nên con người tôi</h2>
+      <p class="section-desc">Mỗi sở thích không chỉ để giải trí mà còn giúp tôi rèn luyện những phẩm chất cần thiết cho ước mơ sau này.</p>
+      <div class="grid-3">
+        <div class="bento-box">
+          <span class="box-icon">📐</span>
+          <h3>Toán học & Lập trình</h3>
+          <p>Tôi thích cảm giác chinh phục những bài toán khó trên VioEdu và tự tay viết từng dòng mã HTML/CSS để xây dựng trang web của riêng mình.</p>
+        </div>
+        <div class="bento-box">
+          <span class="box-icon">♟️</span>
+          <h3>Chiến thuật trên bàn cờ</h3>
+          <p>Những ván cờ lúc rảnh rỗi giúp tôi học cách quan sát toàn cục, phán đoán nước đi của đối thủ và luôn giữ cái đầu lạnh trước mọi tình huống.</p>
+        </div>
+        <div class="bento-box">
+          <span class="box-icon">🎣</span>
+          <h3>Kiên nhẫn khi đi câu cá</h3>
+          <p>Đi câu cá giúp tôi thư giãn sau những giờ học căng thẳng, đồng thời rèn luyện sự tập trung cao độ và đức tính kiên nhẫn chờ đợi thành quả.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="nguyen-tac" class="section-card reveal">
+      <span class="eyebrow">04 · CHÂM NGÔN RÈN LUYỆN</span>
+      <h2>3 Nguyên tắc tôi luôn giữ vững</h2>
+      <p class="section-desc">Để trở thành một chiến sĩ Công an Công nghệ thông tin trong tương lai, tôi tự đặt ra cho mình những kỷ luật ngay từ hôm nay.</p>
+      <div class="grid-3">
+        <div class="bento-box" style="border-top: 3px solid var(--primary);">
+          <h3>01. Kỷ luật tự giác</h3>
+          <p>Luôn hoàn thành bài tập đúng hạn, tự giác ôn luyện Toán và Tin học mỗi ngày mà không cần ai nhắc nhở.</p>
+        </div>
+        <div class="bento-box" style="border-top: 3px solid var(--secondary);">
+          <h3>02. Không ngại thử thách</h3>
+          <p>Gặp bài toán khó hay lỗi lập trình không nản lòng, sẵn sàng tìm tòi cách giải mới và học hỏi từ thầy cô, bạn bè.</p>
+        </div>
+        <div class="bento-box" style="border-top: 3px solid var(--emerald);">
+          <h3>03. Trung thực & Chân thành</h3>
+          <p>Luôn sống ngay thẳng, sẵn sàng giúp đỡ bạn bè trong học tập và giữ tinh thần đoàn kết trong mọi hoạt động tập thể.</p>
+        </div>
+      </div>
+    </section>
+    <section id="lo-trinh" class="section-card reveal">
+      <span class="eyebrow">05 · LỘ TRÌNH CHINH PHỤC ƯỚC MƠ</span>
       <h2>Mục tiêu & Khát vọng</h2>
       <p class="section-desc">Kế hoạch từng bước từ năm học lớp 7 để tiến tới ước mơ trở thành chiến sĩ Công an Công nghệ thông tin.</p>
       <div class="timeline">
@@ -405,8 +498,9 @@
         </div>
       </div>
     </section>
-    <section id="hoi-dap" class="section-card">
-      <span class="eyebrow">04 · GÓC KHÁM PHÁ</span>
+
+    <section id="hoi-dap" class="section-card reveal">
+      <span class="eyebrow">06 · GÓC KHÁM PHÁ</span>
       <h2>Hỏi & Đáp nhanh về tôi</h2>
       <p class="section-desc">Một vài điều thú vị giúp bạn hiểu rõ hơn về đam mê và thói quen của Nhật.</p>
       <div class="grid-2">
@@ -423,14 +517,22 @@
           <p>Chơi cờ rèn khả năng tính toán trước nhiều nước đi, còn đi câu cá giúp tôi giữ sự bình tĩnh và kiên nhẫn khi gặp bài toán hay lỗi code khó.</p>
         </div>
         <div class="bento-box">
-          <h3>🤝 Làm sao để kết bạn hoặc trao đổi học tập?</h3>
+          <h3>📚 Bí quyết ôn luyện VioEdu của tôi là gì?</h3>
+          <p>Tôi thường chia nhỏ thời gian mỗi ngày để làm bài thực hành, ghi chép lại các dạng toán lạ và chủ động trao đổi với thầy cô, bạn bè.</p>
+        </div>
+        <div class="bento-box">
+          <h3>💻 Tôi học làm trang web này như thế nào?</h3>
+          <p>Tôi tự tìm hiểu cấu trúc HTML, CSS, JavaScript cơ bản và sử dụng GitHub Pages để đưa trang web của mình lên mạng miễn phí.</p>
+        </div>
+        <div class="bento-box">
+          <h3>🤝 Làm sao để kết bạn hoặc cùng trao đổi học tập?</h3>
           <p>Bạn có thể gửi lời nhắn ngay ở hộp thư bên dưới hoặc kết nối với tôi qua Facebook để cùng trò chuyện nhé!</p>
         </div>
       </div>
     </section>
 
-    <section id="gui-loi-nhan" class="section-card">
-      <span class="eyebrow">05 · HỘP THƯ KẾT NỐI</span>
+    <section id="gui-loi-nhan" class="section-card reveal">
+      <span class="eyebrow">07 · HỘP THƯ KẾT NỐI</span>
       <h2>Gửi lời nhắn trực tiếp cho Nhật</h2>
       <p class="section-desc">Để lại tên, lời chào và email (hoặc link Facebook) để tôi có thể trả lời lại bạn sớm nhất nhé.</p>
       <form id="formspree-box" method="POST" style="display: flex; flex-direction: column; gap: 12px; max-width: 560px;">
@@ -441,8 +543,8 @@
       </form>
     </section>
 
-    <section id="lien-lac" class="section-card">
-      <span class="eyebrow">06 · GIỮ LIÊN LẠC</span>
+    <section id="lien-lac" class="section-card reveal">
+      <span class="eyebrow">08 · GIỮ LIÊN LẠC</span>
       <h2>Kết nối với tôi</h2>
       <p class="section-desc">Nếu bạn muốn gửi lời chào, trò chuyện về Công nghệ thông tin, Toán, cờ hay câu cá, hãy tìm đến tôi qua những kênh dưới đây.</p>
       <div class="btn-group" style="margin-bottom: 24px;">
@@ -472,7 +574,7 @@
       </div>
     </section>
 
-    <section class="section-card footer-box">
+    <section class="section-card footer-box reveal">
       <span class="eyebrow">CẢM ƠN BẠN ĐÃ GHÉ THĂM</span>
       <h2>Rất vui vì bạn đã ở đây.</h2>
       <p class="section-desc">Nếu có điều gì trong hành trình của tôi khiến bạn quan tâm, hãy gửi một lời chào hoặc cùng bắt đầu một cuộc trò chuyện.</p>
@@ -500,6 +602,7 @@
     document.getElementById("link-yt").href = yt;
     document.getElementById("formspree-box").action = proto + "formspree" + ".io/f/myewjqev";
 
+    // Tự động nhận diện Giao diện Sáng/Tối
     const themeBtn = document.getElementById("theme-toggle");
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -523,6 +626,7 @@
       applyTheme(isDark);
     });
 
+    // Hiệu ứng chữ tự gõ (Typing Effect)
     const phrases = [
       "Học sinh lớp 7 · Trường TH&THCS Phúc Đồng",
       "Đam mê Toán học & Công nghệ thông tin",
@@ -554,6 +658,20 @@
       setTimeout(typeLoop, speed);
     }
     typeLoop();
+
+    // Hiệu ứng xuất hiện mượt mà khi cuộn trang (Scroll Reveal)
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(function(el) {
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>
