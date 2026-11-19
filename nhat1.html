@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nguyễn Đức Nhật — Học sinh lớp 7 · Trường TH&THCS Phúc Đồng</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #2563eb;
+      --secondary: #0ea5e9;
+      --accent-bg: #eff6ff;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+    .navbar {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      max-width: 760px;
+      margin: 16px auto 0;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 999px;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    .nav-brand { font-weight: 800; font-size: 0.95rem; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav-links a { font-size: 0.84rem; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 80px; }
+    .hero-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-radius: 28px;
+      padding: 64px 52px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.25);
+    }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .badge-light {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.12);
+      color: #7dd3fc;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .hero-card h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+    .hero-subtitle { font-size: 1.2rem; font-weight: 600; color: #38bdf8; margin-bottom: 20px; }
+    .hero-desc { color: #cbd5e1; font-size: 1.1rem; max-width: 620px; margin-bottom: 32px; }
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 44px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--accent-bg);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    h2 { font-size: clamp(1.65rem, 3.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .section-desc { color: var(--muted); font-size: 1.08rem; max-width: 680px; margin-bottom: 32px; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 13px 26px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-glow { background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%); color: #fff; box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.45); }
+    .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -4px rgba(37, 99, 235, 0.6); }
+    .btn-glass { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .btn-glass:hover { background: rgba(255, 255, 255, 0.18); transform: translateY(-2px); }
+    .btn-outline { background: #fff; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { background: #f1f5f9; transform: translateY(-2px); }
+    .bento-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+    .bento-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .bento-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+      transition: all 0.25s ease;
+    }
+    .bento-box:hover { transform: translateY(-4px); background: #fff; border-color: #93c5fd; box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.12); }
+    .box-icon { font-size: 1.6rem; margin-bottom: 12px; display: inline-block; }
+    .bento-box h3 { font-size: 1.12rem; font-weight: 700; margin-bottom: 8px; }
+    .bento-box p { color: var(--muted); font-size: 0.96rem; }
+    .group-title { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; display: block; }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+    .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 14px; margin-top: 16px; }
+    .social-item {
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .social-item:hover { background: var(--accent-bg); border-color: var(--primary); transform: translateY(-3px); }
+    .social-item h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 4px; }
+    .social-item span { font-size: 0.85rem; color: var(--muted); word-break: break-all; }
+    .footer-box { text-align: center; background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%); }
+    .footer-box .section-desc { margin-left: auto; margin-right: auto; }
+    .footer-box .btn-group { justify-content: center; }
+    .copyright { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    .copyright strong { display: block; color: var(--text); font-size: 1.05rem; }
+    @media (max-width: 640px) {
+      .navbar { margin: 10px 14px 0; padding: 10px 16px; }
+      .nav-links { gap: 10px; }
+      .hero-card, .section-card { padding: 34px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="nav-brand">Đức Nhật.</a>
+    <div class="nav-links">
+      <a href="#cau-chuyen">Câu chuyện</a>
+      <a href="#hoat-dong">Hoạt động</a>
+      <a href="#ky-nang">Kỹ năng</a>
+      <a href="#muc-tieu">Mục tiêu</a>
+      <a href="#hoi-dap">Hỏi đáp</a>
+      <a href="#lien-lac">Liên hệ</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero-card">
+      <span class="badge-light">TRANG CÁ NHÂN</span>
+      <h1>Nguyễn Đức Nhật</h1>
+      <div class="hero-subtitle">Học sinh lớp 7 · Trường TH&THCS Phúc Đồng</div>
+      <p class="hero-desc">Tôi là Nhật, học sinh lớp 7 yêu thích môn Toán. Lúc rảnh, tôi thường chơi cờ và đi câu cá.</p>
+      <div class="btn-group">
+        <a href="#cau-chuyen" class="btn btn-glow">Xin chào, tôi là Nhật</a>
+        <a href="#gui-loi-nhan" class="btn btn-glass">Gửi lời nhắn</a>
+      </div>
+    </section>
+
+    <section id="cau-chuyen" class="section-card">
+      <span class="eyebrow">01 · CÂU CHUYỆN</span>
+      <h2>Tôi là ai</h2>
+      <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại trường TH&THCS Phúc Đồng. Tôi thích học Toán và luôn tò mò về những điều mới.</p>
+      <div class="bento-3">
+        <div class="bento-box">
+          <span class="box-icon">🚀</span>
+          <h3>Hành trình</h3>
+          <p>Tôi đã tham gia VioEdu, nơi mình được trải nghiệm học tập qua nhiều hoạt động thú vị.</p>
+        </div>
+        <div class="bento-box">
+          <span class="box-icon">♟️</span>
+          <h3>Điều tôi quan tâm</h3>
+          <p>Tôi thích chơi cờ và đi câu cá vào lúc rảnh, bên cạnh môn Toán.</p>
+        </div>
+        <div class="bento-box">
+          <span class="box-icon">🤝</span>
+          <h3>Giá trị theo đuổi</h3>
+          <p>Tôi luôn cố gắng học chăm chỉ và đối xử tử tế với bạn bè.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hoat-dong" class="section-card">
+      <span class="eyebrow">02 · ĐANG THỰC HIỆN</span>
+      <h2>Những điều tôi đang làm</h2>
+      <p class="section-desc">Ngoài VioEdu, tôi còn tham gia nhiều hoạt động và cuộc thi khác.</p>
+      <div class="bento-3">
+        <div class="bento-box">
+          <span class="box-icon">📐</span>
+          <h3>VioEdu</h3>
+          <p>VioEdu là một trong những hoạt động tôi từng tham gia, giúp mình làm quen với nhiều kiến thức mới.</p>
+        </div>
+        <div class="bento-box">
+          <span class="box-icon">🌟</span>
+          <h3>Hoạt động khác</h3>
+          <p>Tôi tham gia các hoạt động khác để học thêm kỹ năng và kết bạn.</p>
+        </div>
+        <div class="bento-box">
+          <span class="box-icon">🏆</span>
+          <h3>Cuộc thi</h3>
+          <p>Tôi cũng tham gia các cuộc thi để thử sức và rèn luyện bản thân.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ky-nang" class="section-card">
+      <span class="eyebrow">03 · CÁCH LÀM VIỆC</span>
+      <h2>Cách tôi tạo ra giá trị</h2>
+      <p class="section-desc">Tôi thích tìm cách giải cho những vấn đề khó, học hỏi từ bạn bè và làm việc nhóm một cách chân thành.</p>
+      <div class="bento-2">
+        <div class="bento-box">
+          <span class="group-title">Kỹ năng mềm và tư duy</span>
+          <div class="tag-cloud">
+            <span class="skill-tag">Làm việc nhóm</span>
+            <span class="skill-tag">Giao tiếp và tự tin</span>
+            <span class="skill-tag">Lập kế hoạch và giải quyết vấn đề</span>
+            <span class="skill-tag">Tư duy sáng tạo và độc lập</span>
+          </div>
+        </div>
+        <div class="bento-box">
+          <span class="group-title">Thái độ và thể chất</span>
+          <div class="tag-cloud">
+            <span class="skill-tag">Bản lĩnh và tinh thần cầu tiến</span>
+            <span class="skill-tag">Khám phá sở thích cá nhân</span>
+            <span class="skill-tag">Sức khỏe và cân bằng cảm xúc</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="muc-tieu" class="section-card">
+      <span class="eyebrow">04 · MỤC TIÊU LỚP 7</span>
+      <h2>Định hướng & Khát vọng</h2>
+      <p class="section-desc">Những cột mốc quan trọng mà tôi đang nỗ lực từng ngày để chinh phục trong năm học lớp 7.</p>
+      <div class="bento-2">
+        <div class="bento-box" style="border-left: 4px solid var(--primary);">
+          <span class="box-icon">🥇</span>
+          <h3>Đấu trường VioEdu Quốc gia</h3>
+          <p>Rèn luyện tư duy Toán học mỗi ngày để vượt qua các vòng loại và giành tấm vé tham dự kỳ thi VioEdu cấp Quốc gia lớp 7.</p>
+        </div>
+        <div class="bento-box" style="border-left: 4px solid var(--secondary);">
+          <span class="box-icon">🎓</span>
+          <h3>Danh hiệu Học sinh Xuất sắc</h3>
+          <p>Duy trì phong độ học tập ổn định ở tất cả các môn học, tích cực tham gia hoạt động tập thể để đạt danh hiệu Xuất sắc năm học lớp 7.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hoi-dap" class="section-card">
+      <span class="eyebrow">05 · GÓC KHÁM PHÁ</span>
+      <h2>Hỏi & Đáp nhanh về tôi</h2>
+      <p class="section-desc">Một vài điều thú vị giúp bạn hiểu rõ hơn về sở thích và thói quen của Nhật.</p>
+      <div class="bento-2">
+        <div class="bento-box">
+          <h3>❓ Tại sao tôi lại thích môn Toán?</h3>
+          <p>Vì cảm giác tìm ra lời giải cho một bài toán hóc búa giống như giải được một mật mã thú vị, giúp đầu óc luôn nhạy bén.</p>
+        </div>
+        <div class="bento-box">
+          <h3>♟️ Chơi cờ và câu cá giúp gì cho việc học?</h3>
+          <p>Chơi cờ rèn cho tôi khả năng tính toán trước nhiều nước đi, còn đi câu cá giúp tôi rèn tính kiên nhẫn và thư giãn sau giờ học.</p>
+        </div>
+        <div class="bento-box">
+          <h3>📚 Bí quyết ôn luyện VioEdu của tôi là gì?</h3>
+          <p>Tôi thường chia nhỏ thời gian mỗi ngày để làm bài tập thực hành, ghi chép lại các dạng toán lạ và hỏi thêm thầy cô, bạn bè.</p>
+        </div>
+        <div class="bento-box">
+          <h3>🤝 Làm sao để kết bạn hoặc rủ tôi đấu cờ?</h3>
+          <p>Bạn có thể để lại lời nhắn ngay ở khung bên dưới hoặc nhắn tin trực tiếp cho tôi qua Facebook nhé!</p>
+        </div>
+      </div>
+    </section>
+
+            <section id="gui-loi-nhan" class="section-card">
+      <span class="eyebrow">06 · HỘP THƯ KẾT NỐI</span>
+      <h2>Gửi lời nhắn trực tiếp cho Nhật</h2>
+      <p class="section-desc">Để lại tên, lời chào và email (hoặc Facebook) để tôi có thể trả lời lại bạn sớm nhất nhé.</p>
+      <form id="formspree-box" method="POST" style="display: flex; flex-direction: column; gap: 14px; max-width: 600px;">
+        <input type="text" name="Ten_nguoi_gui" placeholder="Tên của bạn là gì?" required 
+          style="padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); font-family: inherit; font-size: 0.96rem; outline: none;">
+        <input type="text" name="Lien_he_phan_hoi" placeholder="Email hoặc link Facebook của bạn (để Nhật trả lời lại)" required 
+          style="padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); font-family: inherit; font-size: 0.96rem; outline: none;">
+        <textarea name="Loi_nhan" rows="4" placeholder="Nhập lời chào, câu hỏi về Toán, cờ hoặc hẹn đi câu cá..." required 
+          style="padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); font-family: inherit; font-size: 0.96rem; resize: vertical; outline: none;"></textarea>
+        <button type="submit" class="btn btn-glow" style="border: none; cursor: pointer; width: fit-content;">Gửi lời nhắn ngay</button>
+      </form>
+    </section>
+
+    <section id="lien-lac" class="section-card">
+      <span class="eyebrow">07 · GIỮ LIÊN LẠC</span>
+      <h2>Kết nối với tôi</h2>
+      <p class="section-desc">Nếu bạn muốn gửi lời chào, trò chuyện về cờ, cá hay Toán, hãy tìm đến tôi qua những kênh dưới đây.</p>
+      <div class="btn-group" style="margin-bottom: 32px;">
+        <a id="btn-fb-hello" href="#" target="_blank" rel="noopener" class="btn btn-glow">Gửi lời chào</a>
+        <a href="#kenh-lien-lac" class="btn btn-outline">Theo dõi hành trình</a>
+      </div>
+      <div id="kenh-lien-lac">
+        <span class="group-title">KÊNH LIÊN LẠC</span>
+        <div class="social-grid">
+          <a id="link-fb" href="#" target="_blank" rel="noopener" class="social-item">
+            <h3>Facebook</h3>
+            <span id="text-fb"></span>
+          </a>
+          <a id="link-tt" href="#" target="_blank" rel="noopener" class="social-item">
+            <h3>TikTok</h3>
+            <span>@nguyen_duc_nhat113</span>
+          </a>
+          <a id="link-ig" href="#" target="_blank" rel="noopener" class="social-item">
+            <h3>Instagram</h3>
+            <span>@nguyen_duc_nhat113</span>
+          </a>
+          <a id="link-yt" href="#" target="_blank" rel="noopener" class="social-item">
+            <h3>YouTube</h3>
+            <span>@ducnhat508</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card footer-box">
+      <span class="eyebrow">CẢM ƠN BẠN ĐÃ GHÉ THĂM</span>
+      <h2>Rất vui vì bạn đã ở đây.</h2>
+      <p class="section-desc">Nếu có điều gì trong hành trình của tôi khiến bạn quan tâm, hãy gửi một lời chào hoặc cùng bắt đầu một cuộc trò chuyện.</p>
+      <div class="btn-group">
+        <a href="#kenh-lien-lac" class="btn btn-glow">Xem các trang cá nhân của tôi</a>
+      </div>
+      <div class="copyright">
+        <strong>Nguyễn Đức Nhật</strong>
+        Học sinh lớp 7 · TH&THCS Phúc Đồng
+      </div>
+    </section>
+  </main>
+    <script>
+    const proto = "https:" + "//";
+    const fb = proto + "www.facebook" + ".com/profile.php?id=61576630427190";
+    const tt = proto + "www.tiktok" + ".com/@nguyen_duc_nhat113";
+    const ig = proto + "www.instagram" + ".com/nguyen_duc_nhat113";
+    const yt = proto + "www.youtube" + ".com/@ducnhat508";
+
+    document.getElementById("btn-fb-hello").href = fb;
+    document.getElementById("link-fb").href = fb;
+    document.getElementById("text-fb").textContent = "facebook" + ".com/profile.php?id=61576630427190";
+    document.getElementById("link-tt").href = tt;
+    document.getElementById("link-ig").href = ig;
+    document.getElementById("link-yt").href = yt;
+  </script>
+</body>
+</html>
