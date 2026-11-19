@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Nguyễn Đức Nhật — Định hướng Công an Công nghệ thông tin</title>
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #f4f7fb;
@@ -19,8 +19,9 @@
       --emerald: #10b981;
       --accent-bg: #eff6ff;
       --border: #e2e8f0;
-      --nav-bg: rgba(255, 255, 255, 0.9);
+      --nav-bg: rgba(255, 255, 255, 0.85);
       --shadow: 0 12px 32px -12px rgba(15, 23, 42, 0.08);
+      --glow-color: rgba(37, 99, 235, 0.14);
     }
 
     body.dark-mode {
@@ -34,8 +35,9 @@
       --emerald: #34d399;
       --accent-bg: rgba(56, 189, 248, 0.14);
       --border: #1e293b;
-      --nav-bg: rgba(15, 23, 42, 0.9);
+      --nav-bg: rgba(15, 23, 42, 0.85);
       --shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+      --glow-color: rgba(56, 189, 248, 0.18);
     }
 
     *, *::before, *::after {
@@ -61,6 +63,19 @@
       background-attachment: fixed;
     }
 
+    /* 1. Thanh tiến trình cuộn trang trên cùng */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3.5px;
+      background: linear-gradient(90deg, #2563eb, #38bdf8, #10b981);
+      z-index: 9999;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+    }
+
     .navbar-wrapper {
       position: sticky;
       top: 12px;
@@ -72,8 +87,8 @@
       max-width: 920px;
       margin: 0 auto;
       background: var(--nav-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 10px 18px;
@@ -103,8 +118,9 @@
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
+      position: relative;
     }
-    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover, .nav-links a.active-link { color: var(--primary); }
     .theme-btn {
       background: var(--surface-alt);
       border: 1px solid var(--border);
@@ -114,7 +130,10 @@
       font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
+    .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); }
+
     .container {
       width: 100%;
       max-width: 944px;
@@ -125,27 +144,44 @@
     /* Hiệu ứng xuất hiện mượt mà khi cuộn trang */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(28px) scale(0.985);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
+    /* 2. Hero Card kết hợp Canvas mạng lưới Cyber */
     .hero-card {
-      background: linear-gradient(135deg, #0b1120 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #070d19 0%, #162238 100%);
       color: #ffffff;
       border-radius: 24px;
       padding: 52px 40px;
       margin-bottom: 24px;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.35);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.45);
+    }
+    #cyber-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.45;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
     .badge-tech {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: rgba(16, 185, 129, 0.16);
       color: #34d399;
       font-family: 'JetBrains Mono', monospace;
@@ -154,14 +190,32 @@
       padding: 6px 14px;
       border-radius: 999px;
       margin-bottom: 18px;
-      border: 1px solid rgba(52, 211, 153, 0.3);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
     }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #34d399;
+      animation: pulseRing 1.8s infinite;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
     .hero-card h1 {
       font-size: clamp(2.1rem, 5vw, 3.4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.18;
       margin-bottom: 10px;
+      background: linear-gradient(90deg, #ffffff 0%, #bae6fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      cursor: default;
     }
     .typing-wrapper {
       font-family: 'JetBrains Mono', monospace;
@@ -188,9 +242,15 @@
     }
     .stat-item {
       background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(6px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 14px;
       padding: 14px 16px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .stat-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.45);
     }
     .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 1.15rem; font-weight: 700; color: #38bdf8; display: block; }
     .stat-label { font-size: 0.82rem; color: #cbd5e1; }
@@ -220,6 +280,7 @@
     h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
     .section-desc { color: var(--muted); font-size: 1.02rem; margin-bottom: 26px; }
 
+    /* Nút bấm có hiệu ứng ánh sáng lướt qua */
     .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
       display: inline-flex;
@@ -230,12 +291,30 @@
       font-weight: 600;
       font-size: 0.94rem;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .btn-glow { background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%); color: #fff; box-shadow: 0 6px 16px -4px rgba(37, 99, 235, 0.45); }
-    .btn-glow:hover { transform: translateY(-2px); }
+    .btn-glow {
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      color: #fff;
+      box-shadow: 0 6px 18px -4px rgba(37, 99, 235, 0.5);
+    }
+    .btn-glow::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.5s ease;
+    }
+    .btn-glow:hover::after { left: 140%; }
+    .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -4px rgba(37, 99, 235, 0.65); }
     .btn-glass { background: rgba(255, 255, 255, 0.12); color: #fff; border: 1px solid rgba(255, 255, 255, 0.25); }
+    .btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
     .btn-outline { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
     .grid-3, .grid-2, .social-grid {
       display: grid;
@@ -251,15 +330,33 @@
       .social-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
+    /* 3. Thẻ Bento với hiệu ứng Đèn rọi chuột (Spotlight) & 3D Tilt */
     .bento-box {
       background: var(--surface-alt);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 22px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease-out;
+      transform-style: preserve-3d;
     }
-    .bento-box:hover { transform: translateY(-2px); border-color: var(--primary); }
-    .box-icon { font-size: 1.5rem; margin-bottom: 8px; display: inline-block; }
+    .bento-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--glow-color), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .bento-box:hover::before { opacity: 1; }
+    .bento-box:hover {
+      border-color: var(--primary);
+      box-shadow: 0 12px 28px -10px rgba(37, 99, 235, 0.18);
+    }
+    .box-icon { font-size: 1.5rem; margin-bottom: 8px; display: inline-block; transition: transform 0.3s ease; }
+    .bento-box:hover .box-icon { transform: scale(1.18) rotate(-5deg); }
     .bento-box h3 { font-size: 1.06rem; font-weight: 700; margin-bottom: 6px; }
     .bento-box p { color: var(--muted); font-size: 0.95rem; }
 
@@ -273,10 +370,29 @@
       font-weight: 600;
       font-size: 0.88rem;
       color: var(--text);
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
     }
 
     .timeline { display: flex; flex-direction: column; gap: 14px; border-left: 3px solid var(--primary); padding-left: 18px; margin-left: 4px; }
-    .timeline-item { position: relative; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .timeline-item {
+      position: relative;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .timeline-item:hover {
+      transform: translateX(4px);
+      border-color: var(--primary);
+    }
     .timeline-item::before {
       content: "";
       position: absolute;
@@ -287,6 +403,7 @@
       border-radius: 50%;
       background: var(--primary);
       border: 2px solid var(--surface);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
     }
     .timeline-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; color: var(--emerald); margin-bottom: 4px; display: block; }
 
@@ -298,9 +415,9 @@
       border-radius: 14px;
       padding: 18px 20px;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
-    .social-item:hover { background: var(--accent-bg); border-color: var(--primary); transform: translateY(-2px); }
+    .social-item:hover { background: var(--accent-bg); border-color: var(--primary); transform: translateY(-3px); }
     .social-item h3 { font-size: 1.02rem; color: var(--text); margin-bottom: 2px; }
     .social-item span { font-size: 0.85rem; color: var(--muted); }
 
@@ -314,8 +431,48 @@
       font-family: inherit;
       font-size: 0.95rem;
       outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .form-input:focus { border-color: var(--primary); }
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* Thông báo gửi thành công & Nút cuộn lên đầu trang */
+    #form-status {
+      margin-top: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--emerald);
+      display: none;
+    }
+
+    #back-to-top {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(15px);
+      transition: all 0.3s ease;
+      z-index: 99;
+    }
+    #back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    #back-to-top:hover { transform: translateY(-3px) scale(1.06); }
 
     .footer-box { text-align: center; }
     .footer-box .btn-group { justify-content: center; }
@@ -329,9 +486,11 @@
   </style>
 </head>
 <body>
+  <div id="scroll-progress"></div>
+
   <div class="navbar-wrapper">
     <nav class="navbar">
-      <a href="#" class="nav-brand">&lt;DucNhat /&gt;</a>
+      <a href="#" class="nav-brand scramble-text" data-value="<DucNhat />">&lt;DucNhat /&gt;</a>
       <div class="nav-links">
         <a href="#cau-chuyen">Câu chuyện</a>
         <a href="#ky-nang">Kỹ năng</a>
@@ -346,33 +505,36 @@
 
   <main class="container">
     <section class="hero-card">
-      <span class="badge-tech">🛡️ CÔNG AN CÔNG NGHỆ THÔNG TIN</span>
-      <h1>Nguyễn Đức Nhật</h1>
-      <div class="typing-wrapper">
-        <span id="typing-text"></span><span class="cursor">&nbsp;</span>
-      </div>
-      <p class="hero-desc">Tôi là Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi yêu thích môn Toán, đam mê Công nghệ thông tin và nuôi dưỡng ước mơ trở thành chiến sĩ Công an làm việc trong lĩnh vực An ninh mạng.</p>
-      <div class="btn-group">
-        <a href="#lo-trinh" class="btn btn-glow">Xem lộ trình ước mơ</a>
-        <a href="#gui-loi-nhan" class="btn btn-glass">Gửi lời nhắn cho Nhật</a>
-      </div>
+      <canvas id="cyber-canvas"></canvas>
+      <div class="hero-content">
+        <span class="badge-tech"><span class="pulse-dot"></span> 🛡️ CÔNG AN CÔNG NGHỆ THÔNG TIN</span>
+        <h1 class="scramble-text" data-value="Nguyễn Đức Nhật">Nguyễn Đức Nhật</h1>
+        <div class="typing-wrapper">
+          <span id="typing-text"></span><span class="cursor">&nbsp;</span>
+        </div>
+        <p class="hero-desc">Tôi là Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi yêu thích môn Toán, đam mê Công nghệ thông tin và nuôi dưỡng ước mơ trở thành chiến sĩ Công an làm việc trong lĩnh vực An ninh mạng.</p>
+        <div class="btn-group">
+          <a href="#lo-trinh" class="btn btn-glow">Xem lộ trình ước mơ</a>
+          <a href="#gui-loi-nhan" class="btn btn-glass">Gửi lời nhắn cho Nhật</a>
+        </div>
 
-      <div class="stats-bar">
-        <div class="stat-item">
-          <span class="stat-num">Lớp 7</span>
-          <span class="stat-label">TH&THCS Phúc Đồng</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">VioEdu</span>
-          <span class="stat-label">Mục tiêu Quốc gia</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">Toán & IT</span>
-          <span class="stat-label">Đam mê cốt lõi</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-num">100%</span>
-          <span class="stat-label">Kỷ luật & Kiên trì</span>
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-num">Lớp 7</span>
+            <span class="stat-label">TH&THCS Phúc Đồng</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">VioEdu</span>
+            <span class="stat-label">Mục tiêu Quốc gia</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">Toán & IT</span>
+            <span class="stat-label">Đam mê cốt lõi</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Kỷ luật & Kiên trì</span>
+          </div>
         </div>
       </div>
     </section>
@@ -382,17 +544,17 @@
       <h2>Tôi là ai</h2>
       <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại trường TH&THCS Phúc Đồng. Tôi thích tư duy logic của Toán học và luôn tò mò về cách thế giới công nghệ vận hành.</p>
       <div class="grid-3">
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="box-icon">🚀</span>
           <h3>Hành trình học tập</h3>
           <p>Tôi tích cực tham gia đấu trường VioEdu và tự tìm hiểu lập trình web để rèn luyện tư duy giải quyết vấn đề.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="box-icon">💻</span>
           <h3>Điều tôi quan tâm</h3>
           <p>Tôi đam mê Công nghệ thông tin, thích tự mày mò viết mã, bên cạnh việc chơi cờ và đi câu cá lúc rảnh.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="box-icon">🛡️</span>
           <h3>Giá trị theo đuổi</h3>
           <p>Tôi luôn giữ tinh thần kỷ luật, học tập chăm chỉ, trung thực và đối xử tử tế với bạn bè.</p>
@@ -405,7 +567,7 @@
       <h2>Hành trang tôi đang rèn luyện</h2>
       <p class="section-desc">Kết hợp giữa kiến thức Công nghệ thông tin, tư duy Toán học và tinh thần kỷ luật để hướng tới mục tiêu tương lai.</p>
       <div class="grid-3">
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="group-title">💻 Kỹ năng Công nghệ</span>
           <div class="tag-cloud">
             <span class="skill-tag">HTML & CSS cơ bản</span>
@@ -414,7 +576,7 @@
             <span class="skill-tag">Ứng dụng AI & Tin học</span>
           </div>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="group-title">🧠 Kỹ năng mềm & Tư duy</span>
           <div class="tag-cloud">
             <span class="skill-tag">Giải quyết vấn đề</span>
@@ -423,7 +585,7 @@
             <span class="skill-tag">Tư duy logic</span>
           </div>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="group-title">💪 Kỷ luật & Thể chất</span>
           <div class="tag-cloud">
             <span class="skill-tag">Bản lĩnh & Cầu tiến</span>
@@ -439,17 +601,17 @@
       <h2>Những điều làm nên con người tôi</h2>
       <p class="section-desc">Mỗi sở thích không chỉ để giải trí mà còn giúp tôi rèn luyện những phẩm chất cần thiết cho ước mơ sau này.</p>
       <div class="grid-3">
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="box-icon">📐</span>
           <h3>Toán học & Lập trình</h3>
           <p>Tôi thích cảm giác chinh phục những bài toán khó trên VioEdu và tự tay viết từng dòng mã HTML/CSS để xây dựng trang web của riêng mình.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="box-icon">♟️</span>
           <h3>Chiến thuật trên bàn cờ</h3>
           <p>Những ván cờ lúc rảnh rỗi giúp tôi học cách quan sát toàn cục, phán đoán nước đi của đối thủ và luôn giữ cái đầu lạnh trước mọi tình huống.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <span class="box-icon">🎣</span>
           <h3>Kiên nhẫn khi đi câu cá</h3>
           <p>Đi câu cá giúp tôi thư giãn sau những giờ học căng thẳng, đồng thời rèn luyện sự tập trung cao độ và đức tính kiên nhẫn chờ đợi thành quả.</p>
@@ -462,20 +624,21 @@
       <h2>3 Nguyên tắc tôi luôn giữ vững</h2>
       <p class="section-desc">Để trở thành một chiến sĩ Công an Công nghệ thông tin trong tương lai, tôi tự đặt ra cho mình những kỷ luật ngay từ hôm nay.</p>
       <div class="grid-3">
-        <div class="bento-box" style="border-top: 3px solid var(--primary);">
+        <div class="bento-box interactive-card" style="border-top: 3px solid var(--primary);">
           <h3>01. Kỷ luật tự giác</h3>
           <p>Luôn hoàn thành bài tập đúng hạn, tự giác ôn luyện Toán và Tin học mỗi ngày mà không cần ai nhắc nhở.</p>
         </div>
-        <div class="bento-box" style="border-top: 3px solid var(--secondary);">
+        <div class="bento-box interactive-card" style="border-top: 3px solid var(--secondary);">
           <h3>02. Không ngại thử thách</h3>
           <p>Gặp bài toán khó hay lỗi lập trình không nản lòng, sẵn sàng tìm tòi cách giải mới và học hỏi từ thầy cô, bạn bè.</p>
         </div>
-        <div class="bento-box" style="border-top: 3px solid var(--emerald);">
+        <div class="bento-box interactive-card" style="border-top: 3px solid var(--emerald);">
           <h3>03. Trung thực & Chân thành</h3>
           <p>Luôn sống ngay thẳng, sẵn sàng giúp đỡ bạn bè trong học tập và giữ tinh thần đoàn kết trong mọi hoạt động tập thể.</p>
         </div>
       </div>
     </section>
+
     <section id="lo-trinh" class="section-card reveal">
       <span class="eyebrow">05 · LỘ TRÌNH CHINH PHỤC ƯỚC MƠ</span>
       <h2>Mục tiêu & Khát vọng</h2>
@@ -504,27 +667,27 @@
       <h2>Hỏi & Đáp nhanh về tôi</h2>
       <p class="section-desc">Một vài điều thú vị giúp bạn hiểu rõ hơn về đam mê và thói quen của Nhật.</p>
       <div class="grid-2">
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <h3>🛡️ Tại sao tôi ước mơ làm Công an CNTT?</h3>
           <p>Vì tôi muốn kết hợp niềm đam mê máy tính, lập trình với tinh thần kỷ luật để bảo vệ mọi người trước các nguy cơ trên mạng.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <h3>❓ Toán học và Tin học liên quan gì với nhau?</h3>
           <p>Toán học giúp rèn luyện tư duy logic chặt chẽ, đó chính là nền tảng quan trọng nhất để viết ra những dòng code chuẩn xác.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <h3>♟️ Chơi cờ và câu cá giúp gì cho tôi?</h3>
           <p>Chơi cờ rèn khả năng tính toán trước nhiều nước đi, còn đi câu cá giúp tôi giữ sự bình tĩnh và kiên nhẫn khi gặp bài toán hay lỗi code khó.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <h3>📚 Bí quyết ôn luyện VioEdu của tôi là gì?</h3>
           <p>Tôi thường chia nhỏ thời gian mỗi ngày để làm bài thực hành, ghi chép lại các dạng toán lạ và chủ động trao đổi với thầy cô, bạn bè.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <h3>💻 Tôi học làm trang web này như thế nào?</h3>
           <p>Tôi tự tìm hiểu cấu trúc HTML, CSS, JavaScript cơ bản và sử dụng GitHub Pages để đưa trang web của mình lên mạng miễn phí.</p>
         </div>
-        <div class="bento-box">
+        <div class="bento-box interactive-card">
           <h3>🤝 Làm sao để kết bạn hoặc cùng trao đổi học tập?</h3>
           <p>Bạn có thể gửi lời nhắn ngay ở hộp thư bên dưới hoặc kết nối với tôi qua Facebook để cùng trò chuyện nhé!</p>
         </div>
@@ -539,7 +702,8 @@
         <input type="text" name="Ten_nguoi_gui" class="form-input" placeholder="Tên của bạn là gì?" required>
         <input type="text" name="Lien_he_phan_hoi" class="form-input" placeholder="Email hoặc link Facebook của bạn (để Nhật trả lời lại)" required>
         <textarea name="Loi_nhan" rows="4" class="form-input" style="resize: vertical;" placeholder="Nhập lời chào, câu hỏi về Toán, Công nghệ thông tin, cờ hoặc hẹn đi câu cá..." required></textarea>
-        <button type="submit" class="btn btn-glow" style="border: none; cursor: pointer; width: fit-content;">Gửi lời nhắn ngay</button>
+        <button id="submit-btn" type="submit" class="btn btn-glow" style="border: none; cursor: pointer; width: fit-content;">Gửi lời nhắn ngay</button>
+        <div id="form-status"></div>
       </form>
     </section>
 
@@ -588,21 +752,24 @@
     </section>
   </main>
 
+  <button id="back-to-top" title="Lên đầu trang">↑</button>
+
   <script>
     const proto = "https:" + "//";
     const fb = proto + "www.facebook" + ".com/profile.php?id=61576630427190";
     const tt = proto + "www.tiktok" + ".com/@nguyen_duc_nhat113";
     const ig = proto + "www.instagram" + ".com/nguyen_duc_nhat113";
     const yt = proto + "www.youtube" + ".com/@ducnhat508";
+    const formEndpoint = proto + "formspree" + ".io/f/myewjqev";
 
     document.getElementById("btn-fb-hello").href = fb;
     document.getElementById("link-fb").href = fb;
     document.getElementById("link-tt").href = tt;
     document.getElementById("link-ig").href = ig;
     document.getElementById("link-yt").href = yt;
-    document.getElementById("formspree-box").action = proto + "formspree" + ".io/f/myewjqev";
+    document.getElementById("formspree-box").action = formEndpoint;
 
-    // Tự động nhận diện Giao diện Sáng/Tối
+    // 1. Giao diện Sáng/Tối
     const themeBtn = document.getElementById("theme-toggle");
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -615,18 +782,13 @@
         themeBtn.textContent = "🌙 Tối";
       }
     }
-
     applyTheme(systemDark.matches);
-    systemDark.addEventListener("change", function(e) {
-      applyTheme(e.matches);
+    systemDark.addEventListener("change", e => applyTheme(e.matches));
+    themeBtn.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("dark-mode"));
     });
 
-    themeBtn.addEventListener("click", function() {
-      const isDark = !document.body.classList.contains("dark-mode");
-      applyTheme(isDark);
-    });
-
-    // Hiệu ứng chữ tự gõ (Typing Effect)
+    // 2. Hiệu ứng chữ tự gõ (Typing Effect)
     const phrases = [
       "Học sinh lớp 7 · Trường TH&THCS Phúc Đồng",
       "Đam mê Toán học & Công nghệ thông tin",
@@ -638,13 +800,9 @@
 
     function typeLoop() {
       const current = phrases[pIdx];
-      if (isDeleting) {
-        typingEl.textContent = current.substring(0, cIdx - 1);
-        cIdx--;
-      } else {
-        typingEl.textContent = current.substring(0, cIdx + 1);
-        cIdx++;
-      }
+      typingEl.textContent = isDeleting 
+        ? current.substring(0, --cIdx) 
+        : current.substring(0, ++cIdx);
 
       let speed = isDeleting ? 35 : 70;
       if (!isDeleting && cIdx === current.length) {
@@ -659,18 +817,157 @@
     }
     typeLoop();
 
-    // Hiệu ứng xuất hiện mượt mà khi cuộn trang (Scroll Reveal)
-    const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
+    // 3. Hiệu ứng Giải mã ký tự (Cyber Scramble Text) khi di chuột
+    const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&@$";
+    document.querySelectorAll(".scramble-text").forEach(el => {
+      el.addEventListener("mouseenter", () => {
+        const target = el.dataset.value;
+        let iteration = 0;
+        clearInterval(el.scrambleInterval);
+        el.scrambleInterval = setInterval(() => {
+          el.textContent = target.split("").map((char, index) => {
+            if (char === " ") return " ";
+            if (index < iteration) return target[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join("");
+          if (iteration >= target.length) clearInterval(el.scrambleInterval);
+          iteration += 1 / 2;
+        }, 28);
+      });
+    });
+
+    // 4. Hiệu ứng Nghiêng 3D & Đèn rọi chuột cho các thẻ Bento
+    document.querySelectorAll(".interactive-card").forEach(card => {
+      card.addEventListener("mousemove", e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -4;
+        const rotateY = ((x - centerX) / centerX) * 4;
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)";
+      });
+    });
+
+    // 5. Thanh tiến trình cuộn trang & Nút lên đầu trang
+    const progressBar = document.getElementById("scroll-progress");
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = percent + "%";
+
+      if (scrollTop > 400) {
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.classList.remove("show");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // 6. Scroll Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("active");
       });
     }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-    reveals.forEach(function(el) {
-      observer.observe(el);
+    // 7. Mạng lưới hạt Cyber Network trên Hero Card
+    const canvas = document.getElementById("cyber-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 36; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * 2 + 1
+      });
+    }
+
+    function drawCyber() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "#38bdf8";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 115) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 115})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawCyber);
+    }
+    drawCyber();
+
+    // 8. Gửi Form mượt mà không tải lại trang
+    const form = document.getElementById("formspree-box");
+    const statusEl = document.getElementById("form-status");
+    const submitBtn = document.getElementById("submit-btn");
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      submitBtn.textContent = "Đang gửi...";
+      submitBtn.disabled = true;
+      try {
+        const response = await fetch(formEndpoint, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+        if (response.ok) {
+          statusEl.style.display = "block";
+          statusEl.textContent = "✅ Đã gửi lời nhắn thành công! Nhật sẽ phản hồi bạn sớm nhất nhé.";
+          form.reset();
+        } else {
+          throw new Error("Lỗi gửi");
+        }
+      } catch (err) {
+        statusEl.style.display = "block";
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "❌ Có lỗi xảy ra, bạn thử lại hoặc nhắn qua Facebook nhé!";
+      } finally {
+        submitBtn.textContent = "Gửi lời nhắn ngay";
+        submitBtn.disabled = false;
+      }
     });
   </script>
 </body>
