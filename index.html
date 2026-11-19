@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Nguyễn Đức Nhật — Định hướng Công an Công nghệ thông tin</title>
   <link rel="preconnect" href="https://googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
       --accent-bg: #eff6ff;
       --border: #e2e8f0;
       --nav-bg: rgba(255, 255, 255, 0.9);
-      --shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+      --shadow: 0 12px 32px -12px rgba(15, 23, 42, 0.08);
     }
 
     body.dark-mode {
@@ -35,7 +35,7 @@
       --accent-bg: rgba(56, 189, 248, 0.14);
       --border: #1e293b;
       --nav-bg: rgba(15, 23, 42, 0.9);
-      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+      --shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
     }
 
     *, *::before, *::after {
@@ -61,7 +61,6 @@
       background-attachment: fixed;
     }
 
-    /* Thanh điều hướng gọn nhẹ, không bao giờ tràn */
     .navbar-wrapper {
       position: sticky;
       top: 12px;
@@ -77,7 +76,7 @@
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 10px 16px;
+      padding: 10px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -88,47 +87,46 @@
     .nav-brand {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       color: var(--primary);
       text-decoration: none;
     }
     .nav-links {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
       flex-wrap: wrap;
     }
     .nav-links a {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 600;
       color: var(--muted);
       text-decoration: none;
+      transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--primary); }
     .theme-btn {
       background: var(--surface-alt);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 5px 10px;
+      padding: 6px 12px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
     }
-
-    .container {
+        .container {
       width: 100%;
       max-width: 944px;
       margin: 0 auto;
       padding: 24px 12px 64px;
     }
 
-    /* Khối mở đầu Hero */
     .hero-card {
       background: linear-gradient(135deg, #0b1120 0%, #1e293b 100%);
       color: #ffffff;
       border-radius: 24px;
-      padding: 48px 36px;
+      padding: 52px 40px;
       margin-bottom: 24px;
       position: relative;
       overflow: hidden;
@@ -140,46 +138,45 @@
       background: rgba(16, 185, 129, 0.16);
       color: #34d399;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       margin-bottom: 18px;
       border: 1px solid rgba(52, 211, 153, 0.3);
     }
     .hero-card h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.2;
+      line-height: 1.18;
       margin-bottom: 10px;
     }
     .typing-wrapper {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      font-size: clamp(0.92rem, 2.5vw, 1.12rem);
       font-weight: 700;
       color: #38bdf8;
       margin-bottom: 18px;
-      min-height: 26px;
+      min-height: 28px;
     }
     .cursor { display: inline-block; width: 2px; background-color: #38bdf8; animation: blink 0.8s infinite; }
     @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-    .hero-desc { color: #cbd5e1; font-size: 1.02rem; max-width: 640px; margin-bottom: 28px; }
+    .hero-desc { color: #cbd5e1; font-size: 1.04rem; max-width: 640px; margin-bottom: 28px; }
 
-    /* Các khung nội dung */
     .section-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 36px 32px;
-      margin-bottom: 20px;
+      padding: 40px 36px;
+      margin-bottom: 22px;
       box-shadow: var(--shadow);
       overflow: hidden;
     }
     .eyebrow {
       display: inline-block;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -189,18 +186,18 @@
       border-radius: 999px;
       margin-bottom: 12px;
     }
-    h2 { font-size: clamp(1.45rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
-    .section-desc { color: var(--muted); font-size: 1rem; margin-bottom: 24px; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .section-desc { color: var(--muted); font-size: 1.02rem; margin-bottom: 26px; }
 
     .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 22px;
+      padding: 12px 24px;
       border-radius: 12px;
       font-weight: 600;
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       text-decoration: none;
       transition: all 0.2s ease;
     }
@@ -209,11 +206,10 @@
     .btn-glass { background: rgba(255, 255, 255, 0.12); color: #fff; border: 1px solid rgba(255, 255, 255, 0.25); }
     .btn-outline { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
 
-    /* Hệ thống lưới chuẩn Mobile-First (1 cột trên điện thoại, chia cột trên máy tính) */
     .grid-3, .grid-2, .social-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 14px;
+      gap: 16px;
     }
     @media (min-width: 720px) {
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -228,40 +224,40 @@
       background: var(--surface-alt);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 22px;
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
     .bento-box:hover { transform: translateY(-2px); border-color: var(--primary); }
-    .box-icon { font-size: 1.4rem; margin-bottom: 8px; display: inline-block; }
-    .bento-box h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
-    .bento-box p { color: var(--muted); font-size: 0.94rem; }
+    .box-icon { font-size: 1.5rem; margin-bottom: 8px; display: inline-block; }
+    .bento-box h3 { font-size: 1.06rem; font-weight: 700; margin-bottom: 6px; }
+    .bento-box p { color: var(--muted); font-size: 0.95rem; }
 
     .group-title { font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: block; }
     .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 7px 12px;
+      padding: 8px 13px;
       border-radius: 10px;
       font-weight: 600;
       font-size: 0.88rem;
       color: var(--text);
     }
 
-    .timeline { display: flex; flex-direction: column; gap: 14px; border-left: 3px solid var(--primary); padding-left: 16px; margin-left: 4px; }
-    .timeline-item { position: relative; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+    .timeline { display: flex; flex-direction: column; gap: 14px; border-left: 3px solid var(--primary); padding-left: 18px; margin-left: 4px; }
+    .timeline-item { position: relative; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
     .timeline-item::before {
       content: "";
       position: absolute;
-      left: -24px;
-      top: 22px;
+      left: -26px;
+      top: 24px;
       width: 12px;
       height: 12px;
       border-radius: 50%;
       background: var(--primary);
       border: 2px solid var(--surface);
     }
-    .timeline-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--emerald); margin-bottom: 4px; display: block; }
+    .timeline-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; color: var(--emerald); margin-bottom: 4px; display: block; }
 
     .social-item {
       display: flex;
@@ -269,37 +265,38 @@
       background: var(--surface-alt);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 18px 20px;
       text-decoration: none;
       transition: all 0.2s ease;
     }
     .social-item:hover { background: var(--accent-bg); border-color: var(--primary); transform: translateY(-2px); }
-    .social-item h3 { font-size: 1rem; color: var(--text); margin-bottom: 2px; }
-    .social-item span { font-size: 0.84rem; color: var(--muted); }
+    .social-item h3 { font-size: 1.02rem; color: var(--text); margin-bottom: 2px; }
+    .social-item span { font-size: 0.85rem; color: var(--muted); }
 
     .form-input {
       width: 100%;
-      padding: 12px 14px;
+      padding: 13px 16px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: var(--surface-alt);
       color: var(--text);
       font-family: inherit;
-      font-size: 0.94rem;
+      font-size: 0.95rem;
       outline: none;
     }
     .form-input:focus { border-color: var(--primary); }
 
     .footer-box { text-align: center; }
     .footer-box .btn-group { justify-content: center; }
-    .copyright { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.88rem; }
-    .copyright strong { display: block; color: var(--text); font-size: 1rem; }
+    .copyright { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    .copyright strong { display: block; color: var(--text); font-size: 1.05rem; }
 
     @media (max-width: 600px) {
       .hero-card { padding: 32px 20px; border-radius: 20px; }
-.section-card { padding: 26px 18px; border-radius: 18px; }
-### Phần 2: Thanh menu, Giới thiệu & Bộ kỹ năng (Dán nối tiếp dưới Phần 1)
-```html
+      .section-card { padding: 26px 18px; border-radius: 18px; }
+    }
+  </style>
+</head>
 <body>
   <div class="navbar-wrapper">
     <nav class="navbar">
@@ -385,7 +382,8 @@
         </div>
       </div>
     </section>
-          <section id="lo-trinh" class="section-card">
+
+    <section id="lo-trinh" class="section-card">
       <span class="eyebrow">03 · LỘ TRÌNH CHINH PHỤC ƯỚC MƠ</span>
       <h2>Mục tiêu & Khát vọng</h2>
       <p class="section-desc">Kế hoạch từng bước từ năm học lớp 7 để tiến tới ước mơ trở thành chiến sĩ Công an Công nghệ thông tin.</p>
@@ -407,7 +405,6 @@
         </div>
       </div>
     </section>
-
     <section id="hoi-dap" class="section-card">
       <span class="eyebrow">04 · GÓC KHÁM PHÁ</span>
       <h2>Hỏi & Đáp nhanh về tôi</h2>
@@ -503,7 +500,6 @@
     document.getElementById("link-yt").href = yt;
     document.getElementById("formspree-box").action = proto + "formspree" + ".io/f/myewjqev";
 
-    // Tự động nhận diện Giao diện Sáng/Tối theo thiết bị
     const themeBtn = document.getElementById("theme-toggle");
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -527,7 +523,6 @@
       applyTheme(isDark);
     });
 
-    // Hiệu ứng chữ tự gõ (Typing Effect)
     const phrases = [
       "Học sinh lớp 7 · Trường TH&THCS Phúc Đồng",
       "Đam mê Toán học & Công nghệ thông tin",
