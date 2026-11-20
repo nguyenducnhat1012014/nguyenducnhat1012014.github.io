@@ -1533,31 +1533,50 @@
       requestAnimationFrame(tick);
     }
 
-    // 1. Giao diện Sáng/Tối (có lưu localStorage)
-    const themeBtn = document.getElementById("theme-toggle");
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+    // 1. Giao diện Sáng/Tối tự động theo giờ + vẫn cho bấm chọn tay
+const themeBtn = document.getElementById("theme-toggle");
 
-    function applyTheme(isDark, save = true) {
-      document.body.classList.toggle("dark-mode", isDark);
-      themeBtn.textContent = isDark ? "☀️ Sáng" : "🌙 Tối";
-      if (save) {
-        try { localStorage.setItem("nhat_theme", isDark ? "dark" : "light"); } catch (_) {}
-      }
-    }
+// 06:00 - 17:59 -> Sáng (false), 18:00 - 05:59 -> Tối (true)
+function isDarkByClock() {
+  const hour = new Date().getHours();
+  return hour >= 18 || hour < 6;
+}
 
-    let savedTheme = null;
-    try { savedTheme = localStorage.getItem("nhat_theme"); } catch (_) {}
-    applyTheme(savedTheme ? savedTheme === "dark" : systemDark.matches, false);
+function applyTheme(isDark, saveManual = false) {
+  document.body.classList.toggle("dark-mode", isDark);
+  themeBtn.textContent = isDark ? "☀️ Sáng" : "🌙 Tối";
+  if (saveManual) {
+    try {
+      localStorage.setItem("nhat_theme_mode", isDark ? "dark" : "light");
+    } catch (_) {}
+  }
+}
 
-    systemDark.addEventListener("change", e => {
-      let hasSaved = false;
-      try { hasSaved = !!localStorage.getItem("nhat_theme"); } catch (_) {}
-      if (!hasSaved) applyTheme(e.matches, false);
-    });
-    themeBtn.addEventListener("click", () => {
-      applyTheme(!document.body.classList.contains("dark-mode"), true);
-    });
+let manualMode = null;
+try {
+  manualMode = localStorage.getItem("nhat_theme_mode");
+} catch (_) {}
 
+if (manualMode === "dark" || manualMode === "light") {
+  applyTheme(manualMode === "dark", false);
+} else {
+  applyTheme(isDarkByClock(), false);
+}
+
+setInterval(() => {
+  let currentManual = null;
+  try {
+    currentManual = localStorage.getItem("nhat_theme_mode");
+  } catch (_) {}
+  if (!currentManual) {
+    applyTheme(isDarkByClock(), false);
+  }
+}, 60000);
+
+themeBtn.addEventListener("click", () => {
+  const nextDark = !document.body.classList.contains("dark-mode");
+  applyTheme(nextDark, true);
+});
     // 2. Mạng lưới hạt Cyber Network
     const canvas = document.getElementById("cyber-canvas");
     const ctx = canvas.getContext("2d");
