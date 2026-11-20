@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nguyễn Đức Nhật — Định hướng Công an Công nghệ thông tin</title>
   <meta name="description" content="Trang cá nhân của Nguyễn Đức Nhật, học sinh lớp 7 Trường TH&THCS Phúc Đồng. Liên tục Xuất sắc từ lớp 1 tới lớp 7, chứng nhận VioEdu và định hướng Công an Công nghệ thông tin.">
-  <meta property="og:title" content="Nguyễn Đức Nhật — Định hướng Công an Công nghệ thông tin">
-  <meta property="og:description" content="Học sinh lớp 7 Trường TH&THCS Phúc Đồng · Xuất sắc từ lớp 1 đến lớp 7 · Tài năng VioEdu · Định hướng Công an CNTT.">
-  <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,10 +68,65 @@
       background-image:
         linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
-        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.12), transparent 42%),
-        radial-gradient(circle at 88% 15%, rgba(16, 185, 129, 0.1), transparent 40%);
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.14), transparent 42%),
+        radial-gradient(circle at 88% 15%, rgba(16, 185, 129, 0.12), transparent 40%);
       background-size: 36px 36px, 36px 36px, auto, auto;
       background-attachment: fixed;
+    }
+
+    /* HUD khởi động 0.9s */
+    #hud-boot {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: #04070f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    #hud-boot.done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .hud-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: #38bdf8;
+    }
+    .hud-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+    .hud-bar {
+      width: min(300px, 82vw);
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      overflow: hidden;
+    }
+    .hud-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2563eb, #38bdf8, #34d399);
+      box-shadow: 0 0 12px #38bdf8;
+      transition: width 0.07s linear;
+    }
+    .hud-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #34d399;
     }
 
     body.fx-off .radar-ring,
@@ -82,8 +134,8 @@
     body.fx-off .avatar-scan,
     body.fx-off .shield-svg,
     body.fx-off #cyber-canvas,
-    body.fx-off .floating-symbols,
-    body.fx-off #boot-screen,
+    body.fx-off .meteor-field,
+    body.fx-off #hud-boot,
     body.fx-off .anim-float,
     body.fx-off .anim-pulse-svg,
     body.fx-off .anim-sweep {
@@ -101,13 +153,13 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      #boot-screen, .radar-ring, .radar-ring-outer, .avatar-scan, .shield-svg,
-      #cyber-canvas, .floating-symbols, .pulse-dot, .hero-title,
+      #hud-boot, .radar-ring, .radar-ring-outer, .avatar-scan, .shield-svg,
+      #cyber-canvas, .meteor-field, .pulse-dot, .hero-title,
       .anim-float, .anim-pulse-svg, .anim-sweep {
         display: none !important;
         animation: none !important;
       }
-      .reveal, .unfold-box, .stagger-timeline .timeline-item {
+      .reveal, .unfold-box, .stagger-timeline .timeline-item, .scroll-zoom {
         opacity: 1 !important;
         clip-path: none !important;
         transform: none !important;
@@ -115,82 +167,56 @@
       }
     }
 
-    /* Màn hình khởi động Cyber Boot (nhịp kiểu thanh nạp ngang) */
-    #boot-screen {
-      position: fixed;
-      inset: 0;
-      background: #04070f;
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      padding: 20px;
-      transition: opacity 0.45s ease, visibility 0.45s ease;
-    }
-    #boot-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .boot-brand {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #ffffff;
-    }
-    .boot-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: #38bdf8;
-      text-align: center;
-    }
-    .boot-bar-wrap {
-      width: min(340px, 84vw);
-      height: 5px;
-      background: rgba(56, 189, 248, 0.16);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(56, 189, 248, 0.38);
-    }
-    .boot-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #2563eb, #38bdf8, #34d399);
-      box-shadow: 0 0 14px #38bdf8;
-      transition: width 0.14s ease-out;
-    }
-    .boot-pct {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: #34d399;
-    }
-
-    /* Ký hiệu Toán & Code trôi nhẹ trên nền */
-    .floating-symbols {
+    /* Sao băng chạy rõ nét trên nền */
+    .meteor-field {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
       overflow: hidden;
     }
-    .symbol-item {
+    .meteor {
       position: absolute;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 0.92rem;
-      color: var(--primary);
-      opacity: 0.1;
-      will-change: transform;
-      animation: driftUp linear infinite;
+      width: 150px;
+      height: 2.5px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(56, 189, 248, 0.75), rgba(52, 211, 153, 0.35), transparent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+      opacity: 0;
+      transform: rotate(-32deg) translate3d(0, 0, 0);
+      will-change: transform, opacity;
+      animation: shootingStar var(--dur, 4.5s) linear var(--delay, 0s) infinite;
     }
-    @keyframes driftUp {
-      0% { transform: translateY(105vh) rotate(0deg); }
-      100% { transform: translateY(-10vh) rotate(18deg); }
+    .meteor::before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: -2px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 14px #38bdf8, 0 0 24px #34d399;
+    }
+    body:not(.dark-mode) .meteor {
+      background: linear-gradient(90deg, rgba(2, 132, 199, 0.95), rgba(37, 99, 235, 0.65), rgba(5, 150, 105, 0.35), transparent);
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.55);
+    }
+    @keyframes shootingStar {
+      0% {
+        opacity: 0;
+        transform: rotate(-32deg) translate3d(0, 0, 0);
+      }
+      8% {
+        opacity: 0.95;
+      }
+      72% {
+        opacity: 0.85;
+      }
+      100% {
+        opacity: 0;
+        transform: rotate(-32deg) translate3d(-560px, 350px, 0);
+      }
     }
 
     /* Thanh tiến trình đọc trang */
@@ -333,12 +359,20 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(26px);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Phóng to rõ nét khi lại gần giữa màn hình, thu nhỏ khi rời xa */
+    .scroll-zoom {
+      transform: scale(var(--zoom, 0.92));
+      box-shadow: var(--shadow), 0 0 var(--zoom-glow, 0px) rgba(56, 189, 248, var(--zoom-glow-alpha, 0));
+      will-change: transform, box-shadow;
+      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
     }
 
     /* Hiệu ứng khung ảnh / thẻ tự bung mở & chuyển động liên tục */
@@ -569,11 +603,11 @@
 
     .hero-title {
       font-family: 'Barlow Condensed', 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2.7rem, 6.4vw, 4.2rem);
+      font-size: clamp(2.8rem, 6.6vw, 4.35rem);
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.01em;
-      line-height: 1.05;
+      letter-spacing: 0.02em;
+      line-height: 1.04;
       margin-bottom: 10px;
       background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 48%, #34d399 100%);
       background-size: 200% auto;
@@ -689,7 +723,7 @@
       border: 1px solid var(--border);
       border-radius: 22px;
       padding: 38px 34px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       box-shadow: var(--shadow);
       overflow: hidden;
       position: relative;
@@ -765,14 +799,13 @@
       color: var(--primary);
     }
 
-    .grid-3, .grid-2, .social-grid {
+    .grid-3, .social-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 16px;
     }
     @media (min-width: 720px) {
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
-      .grid-2 { grid-template-columns: repeat(2, 1fr); }
       .social-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 900px) {
@@ -803,13 +836,6 @@
       border-color: var(--primary);
       box-shadow: 0 16px 34px -12px rgba(2, 132, 199, 0.24);
     }
-    .box-icon {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-    .bento-box:hover .box-icon { transform: scale(1.15); }
     .bento-box h3 {
       font-size: 1.06rem;
       font-weight: 700;
@@ -903,7 +929,6 @@
       box-shadow: 0 0 28px -6px rgba(16, 185, 129, 0.32);
     }
 
-    /* Time-lapse chạy từ từ từng khối khi hiện ra */
     .stagger-timeline .timeline-item {
       opacity: 0;
       transform: translateY(20px) scale(0.985);
@@ -916,11 +941,11 @@
       transform: translateY(0) scale(1);
     }
     .reveal.active .stagger-timeline .timeline-item:nth-child(1) { transition-delay: 0.08s; }
-    .reveal.active .stagger-timeline .timeline-item:nth-child(2) { transition-delay: 0.22s; }
-    .reveal.active .stagger-timeline .timeline-item:nth-child(3) { transition-delay: 0.36s; }
-    .reveal.active .stagger-timeline .timeline-item:nth-child(4) { transition-delay: 0.50s; }
-    .reveal.active .stagger-timeline .timeline-item:nth-child(5) { transition-delay: 0.64s; }
-    .reveal.active .stagger-timeline .timeline-item:nth-child(6) { transition-delay: 0.78s; }
+    .reveal.active .stagger-timeline .timeline-item:nth-child(2) { transition-delay: 0.20s; }
+    .reveal.active .stagger-timeline .timeline-item:nth-child(3) { transition-delay: 0.32s; }
+    .reveal.active .stagger-timeline .timeline-item:nth-child(4) { transition-delay: 0.44s; }
+    .reveal.active .stagger-timeline .timeline-item:nth-child(5) { transition-delay: 0.56s; }
+    .reveal.active .stagger-timeline .timeline-item:nth-child(6) { transition-delay: 0.68s; }
 
     .faq-list { display: flex; flex-direction: column; gap: 10px; }
     .faq-item {
@@ -1066,21 +1091,21 @@
   </style>
 </head>
 <body>
-  <div id="boot-screen" aria-hidden="true">
-    <div class="boot-brand">DUC_NHAT // HUD</div>
-    <div class="boot-label">BOOTING CYBER PORTFOLIO LAYER...</div>
-    <div class="boot-bar-wrap">
-      <div id="boot-bar-fill" class="boot-bar-fill"></div>
+  <div id="hud-boot" aria-hidden="true">
+    <div class="hud-tag">SYSTEM HUD · 0.9S BOOT</div>
+    <div class="hud-title">NGUYỄN ĐỨC NHẬT</div>
+    <div class="hud-bar">
+      <div id="hud-bar-fill" class="hud-bar-fill"></div>
     </div>
-    <div id="boot-pct" class="boot-pct">0%</div>
+    <div id="hud-pct" class="hud-pct">0%</div>
   </div>
 
   <div id="scroll-progress"></div>
-  <div class="floating-symbols" id="floating-symbols" aria-hidden="true"></div>
+  <div class="meteor-field" id="meteor-field" aria-hidden="true"></div>
 
   <div class="navbar-wrapper">
     <nav class="navbar" aria-label="Điều hướng chính">
-      <a href="#" class="nav-brand scramble-text" data-value="<DucNhat />">&lt;DucNhat /&gt;</a>
+      <a href="#" class="nav-brand scramble-text" data-value="NGUYỄN ĐỨC NHẬT">NGUYỄN ĐỨC NHẬT</a>
       <div class="nav-links" id="nav-links">
         <a href="#cau-chuyen">Câu chuyện</a>
         <a href="#ky-nang">Kỹ năng</a>
@@ -1095,7 +1120,7 @@
   </div>
 
   <main class="container">
-    <section class="hero-card">
+    <section class="hero-card scroll-zoom">
       <canvas id="cyber-canvas" aria-hidden="true"></canvas>
       <div class="hero-content">
         <div class="hero-top">
@@ -1107,7 +1132,7 @@
             </div>
           </div>
 
-          <div class="cyber-badge-card" title="Định hướng An ninh mạng & Công nghệ thông tin">
+          <div class="cyber-badge-card" title="Nguyễn Đức Nhật — Định hướng An ninh mạng & Công nghệ thông tin">
             <img id="avatar-img" src="avatar.jpg" alt="Nguyễn Đức Nhật" onload="this.style.display='block'; document.getElementById('shield-default').style.display='none';" onerror="this.style.display='none';">
             <div id="shield-default" style="display:flex; align-items:center; justify-content:center;">
               <div class="radar-ring-outer"></div>
@@ -1127,7 +1152,7 @@
           </div>
         </div>
 
-        <p class="hero-desc">Tôi là Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi duy trì danh hiệu Xuất sắc từ lớp 1 tới lớp 7, yêu thích Toán học & Công nghệ thông tin, có chứng nhận VioEdu và hướng tới trở thành chiến sĩ Công an Công nghệ thông tin.</p>
+        <p class="hero-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại Trường TH&amp;THCS Phúc Đồng. Tôi duy trì danh hiệu Xuất sắc từ lớp 1 tới lớp 7, yêu thích Toán học &amp; Công nghệ thông tin, có chứng nhận VioEdu và hướng tới trở thành chiến sĩ Công an Công nghệ thông tin.</p>
 
         <div class="mini-terminal">
           <div class="term-cmds">
@@ -1141,8 +1166,8 @@
         </div>
 
         <div class="btn-group">
-          <a href="#thanh-tich-timelapse" class="btn btn-glow">Xem time-lapse & thành tích</a>
-          <a href="#gui-loi-nhan" class="btn btn-glass">Gửi lời nhắn cho Nhật</a>
+          <a href="#thanh-tich-timelapse" class="btn btn-glow">Xem time-lapse &amp; thành tích</a>
+          <a href="#gui-loi-nhan" class="btn btn-glass">Gửi lời nhắn cho Nguyễn Đức Nhật</a>
         </div>
 
         <div class="stats-bar">
@@ -1156,20 +1181,20 @@
           </div>
           <div class="stat-item">
             <span class="stat-num">Lớp 7</span>
-            <span class="stat-label">TH&THCS Phúc Đồng</span>
+            <span class="stat-label">TH&amp;THCS Phúc Đồng</span>
           </div>
           <div class="stat-item">
             <span class="stat-num count-up" data-prefix="" data-target="100" data-suffix="%">100%</span>
-            <span class="stat-label">Kỷ luật & Kiên trì</span>
+            <span class="stat-label">Kỷ luật &amp; Kiên trì</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="cau-chuyen" class="section-card reveal">
-      <span class="eyebrow">01 · CÂU CHUYỆN</span>
+    <section id="cau-chuyen" class="section-card reveal scroll-zoom">
+      <span class="eyebrow">01 · CÂU CHUYỆN CỦA NGUYỄN ĐỨC NHẬT</span>
       <h2>Tôi là ai</h2>
-      <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi thích tư duy logic của Toán học và luôn tò mò về cách thế giới công nghệ vận hành.</p>
+      <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại Trường TH&amp;THCS Phúc Đồng. Tôi thích tư duy logic của Toán học và luôn tò mò về cách thế giới công nghệ vận hành.</p>
       <div class="grid-3">
         <div class="bento-box unfold-box interactive-card tilt-card">
           <div class="anim-banner">
@@ -1209,22 +1234,22 @@
       </div>
     </section>
 
-    <section id="ky-nang" class="section-card reveal">
-      <span class="eyebrow">02 · NĂNG LỰC & KỸ NĂNG</span>
+    <section id="ky-nang" class="section-card reveal scroll-zoom">
+      <span class="eyebrow">02 · NĂNG LỰC &amp; KỸ NĂNG</span>
       <h2>Hành trang tôi đang rèn luyện</h2>
       <p class="section-desc">Kết hợp giữa kiến thức Công nghệ thông tin, tư duy Toán học và tinh thần kỷ luật để hướng tới mục tiêu tương lai.</p>
       <div class="grid-3">
         <div class="bento-box unfold-box interactive-card tilt-card">
           <span class="group-title">💻 Kỹ năng Công nghệ</span>
           <div class="tag-cloud">
-            <span class="skill-tag">HTML & CSS cơ bản</span>
+            <span class="skill-tag">HTML &amp; CSS cơ bản</span>
             <span class="skill-tag">GitHub Pages</span>
             <span class="skill-tag">Tư duy thuật toán</span>
-            <span class="skill-tag">Ứng dụng AI & Tin học</span>
+            <span class="skill-tag">Ứng dụng AI &amp; Tin học</span>
           </div>
         </div>
         <div class="bento-box unfold-box interactive-card tilt-card">
-          <span class="group-title">🧠 Kỹ năng mềm & Tư duy</span>
+          <span class="group-title">🧠 Kỹ năng mềm &amp; Tư duy</span>
           <div class="tag-cloud">
             <span class="skill-tag">Giải quyết vấn đề</span>
             <span class="skill-tag">Làm việc nhóm</span>
@@ -1233,9 +1258,9 @@
           </div>
         </div>
         <div class="bento-box unfold-box interactive-card tilt-card">
-          <span class="group-title">💪 Kỷ luật & Thể chất</span>
+          <span class="group-title">💪 Kỷ luật &amp; Thể chất</span>
           <div class="tag-cloud">
-            <span class="skill-tag">Bản lĩnh & Cầu tiến</span>
+            <span class="skill-tag">Bản lĩnh &amp; Cầu tiến</span>
             <span class="skill-tag">Tính kiên nhẫn</span>
             <span class="skill-tag">Rèn luyện sức khỏe</span>
           </div>
@@ -1243,8 +1268,8 @@
       </div>
     </section>
 
-    <section id="so-thich" class="section-card reveal">
-      <span class="eyebrow">03 · GÓC SỞ THÍCH & ĐAM MÊ</span>
+    <section id="so-thich" class="section-card reveal scroll-zoom">
+      <span class="eyebrow">03 · GÓC SỞ THÍCH &amp; ĐAM MÊ</span>
       <h2>Những điều làm nên con người tôi</h2>
       <p class="section-desc">Mỗi sở thích không chỉ để giải trí mà còn giúp tôi rèn luyện những phẩm chất cần thiết cho ước mơ sau này.</p>
       <div class="grid-3">
@@ -1253,7 +1278,7 @@
             <div class="anim-sweep"></div>
             <span class="anim-float" style="font-size: 2.3rem;">📐</span>
           </div>
-          <h3>Toán học & Lập trình</h3>
+          <h3>Toán học &amp; Lập trình</h3>
           <p>Thích chinh phục các bài toán trên VioEdu và tự tay viết HTML/CSS/JS để tạo trang web của riêng mình.</p>
         </div>
         <div class="bento-box unfold-box interactive-card tilt-card">
@@ -1275,7 +1300,7 @@
       </div>
     </section>
 
-    <section id="nguyen-tac" class="section-card reveal">
+    <section id="nguyen-tac" class="section-card reveal scroll-zoom">
       <span class="eyebrow">04 · CHÂM NGÔN RÈN LUYỆN</span>
       <h2>3 Nguyên tắc tôi luôn giữ vững</h2>
       <p class="section-desc">Để trở thành một chiến sĩ Công an Công nghệ thông tin trong tương lai, tôi tự đặt ra cho mình những kỷ luật ngay từ hôm nay.</p>
@@ -1289,16 +1314,16 @@
           <p>Gặp bài toán khó hay lỗi lập trình không nản lòng, sẵn sàng tìm tòi cách giải mới và học hỏi từ thầy cô, bạn bè.</p>
         </div>
         <div class="bento-box unfold-box interactive-card tilt-card" style="border-top: 3px solid var(--emerald);">
-          <h3>03. Trung thực & Chân thành</h3>
+          <h3>03. Trung thực &amp; Chân thành</h3>
           <p>Luôn sống ngay thẳng, sẵn sàng giúp đỡ bạn bè trong học tập và giữ tinh thần đoàn kết trong mọi hoạt động tập thể.</p>
         </div>
       </div>
     </section>
 
-    <section id="thanh-tich-timelapse" class="section-card reveal">
-      <span class="eyebrow">05 · THÀNH TÍCH & TIME-LAPSE HÀNH TRÌNH</span>
-      <h2>Cột mốc đã đạt được & Hướng đi tương lai</h2>
-      <p class="section-desc">Thành tích Xuất sắc từ lớp 1 tới lớp 7 (bản cứng đang lưu giữ), các chứng nhận VioEdu và time-lapse chạy từ từ từng khối.</p>
+    <section id="thanh-tich-timelapse" class="section-card reveal scroll-zoom">
+      <span class="eyebrow">05 · THÀNH TÍCH &amp; TIME-LAPSE HÀNH TRÌNH</span>
+      <h2>Cột mốc đã đạt được &amp; Hướng đi tương lai</h2>
+      <p class="section-desc">Danh hiệu Xuất sắc từ lớp 1 tới lớp 7 (bản cứng đang lưu giữ), các chứng nhận VioEdu và time-lapse chạy từ từ từng khối.</p>
 
       <div class="grid-3" style="margin-bottom: 24px;">
         <div class="bento-box unfold-box interactive-card tilt-card">
@@ -1326,7 +1351,7 @@
             <div class="anim-sweep"></div>
             <span class="anim-float" style="font-size: 2.3rem;">📝</span>
           </div>
-          <h3>Cấp Xã & 10 lần kiểm tra</h3>
+          <h3>Cấp Xã &amp; 10 lần kiểm tra</h3>
           <p>Đạt <strong>Hoàn thành</strong> vòng cấp Xã (Hương Bình, Hà Tĩnh, 2025–2026) và hoàn thành 10 lần kiểm tra VioEdu (23/07/2026).</p>
           <span class="mini-tag">Hoàn thành · 23/07/2026</span>
         </div>
@@ -1341,7 +1366,7 @@
 
         <div class="timeline-item">
           <span class="timeline-badge">BƯỚC 02 · NĂM HỌC 2025–2026 (LỚP 6C)</span>
-          <h3>🏅 Đấu trường VioEdu cấp Xã & Chung kết 3 miền</h3>
+          <h3>🏅 Đấu trường VioEdu cấp Xã &amp; Chung kết 3 miền</h3>
           <p>Đạt thành tích <strong>Hoàn thành</strong> vòng cấp Xã/Phường/Đặc khu (Xã Hương Bình, Tỉnh Hà Tĩnh) và đạt thành tích <strong>Tài năng</strong> ở vòng thi tuyển chọn trực tuyến Chung kết 3 miền VioEdu năm học 2025–2026.</p>
         </div>
 
@@ -1354,12 +1379,12 @@
         <div class="timeline-item">
           <span class="timeline-badge">BƯỚC 04 · TỰ HỌC CÔNG NGHỆ</span>
           <h3>💻 Xây dựng website cá nhân trên GitHub Pages</h3>
-          <p>Tự tìm hiểu HTML, CSS, JavaScript, làm hiệu ứng chuyển động & khung tự bung, đưa trang lên GitHub Pages cùng hộp thư liên hệ.</p>
+          <p>Tự tìm hiểu HTML, CSS, JavaScript, làm hiệu ứng chuyển động &amp; khung tự bung, đưa trang lên GitHub Pages cùng hộp thư liên hệ.</p>
         </div>
 
         <div class="timeline-item">
           <span class="timeline-badge">BƯỚC 05 · HIỆN TẠI (LỚP 7 · PHÚC ĐỒNG)</span>
-          <h3>📐 Học sinh lớp 7 Trường TH&THCS Phúc Đồng</h3>
+          <h3>📐 Học sinh lớp 7 Trường TH&amp;THCS Phúc Đồng</h3>
           <p>Tiếp tục rèn Toán học, Tin học, tư duy chiến thuật qua chơi cờ và tính kiên nhẫn qua đi câu cá.</p>
         </div>
 
@@ -1371,9 +1396,9 @@
       </div>
     </section>
 
-    <section id="hoi-dap" class="section-card reveal">
+    <section id="hoi-dap" class="section-card reveal scroll-zoom">
       <span class="eyebrow">06 · GÓC KHÁM PHÁ</span>
-      <h2>Hỏi & Đáp nhanh về tôi</h2>
+      <h2>Hỏi &amp; Đáp nhanh về tôi</h2>
       <p class="section-desc">Bấm vào từng câu hỏi để xem câu trả lời chi tiết.</p>
       <div class="faq-list">
         <div class="faq-item open">
@@ -1399,7 +1424,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-btn" type="button">
-            <span>📚 Bí quyết giữ Xuất sắc từ lớp 1 tới lớp 7 & ôn VioEdu?</span>
+            <span>📚 Bí quyết giữ Xuất sắc từ lớp 1 tới lớp 7 &amp; ôn VioEdu?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-body">Tôi giữ thói quen học đều đặn mỗi ngày, làm bài thực hành cẩn thận, ghi chép lại các dạng toán lạ và chủ động trao đổi với thầy cô, bạn bè.</div>
@@ -1414,22 +1439,22 @@
       </div>
     </section>
 
-    <section id="gui-loi-nhan" class="section-card reveal">
+    <section id="gui-loi-nhan" class="section-card reveal scroll-zoom">
       <span class="eyebrow">07 · HỘP THƯ KẾT NỐI</span>
-      <h2>Gửi lời nhắn trực tiếp cho Nhật</h2>
+      <h2>Gửi lời nhắn trực tiếp cho Nguyễn Đức Nhật</h2>
       <p class="section-desc">Để lại tên, lời chào và email (hoặc link Facebook) để tôi có thể trả lời lại bạn sớm nhất nhé.</p>
       <form id="formspree-box" action="https://formspree.io/f/myewjqev" method="POST" style="display: flex; flex-direction: column; gap: 12px; max-width: 560px;">
         <input type="text" name="Ten_nguoi_gui" class="form-input" placeholder="Tên của bạn là gì?" required>
-        <input type="text" name="Lien_he_phan_hoi" class="form-input" placeholder="Email hoặc link Facebook của bạn (để Nhật trả lời lại)" required>
+        <input type="text" name="Lien_he_phan_hoi" class="form-input" placeholder="Email hoặc link Facebook của bạn (để Nguyễn Đức Nhật trả lời lại)" required>
         <textarea name="Loi_nhan" rows="4" class="form-input" style="resize: vertical;" placeholder="Nhập lời chào, câu hỏi về Toán, Công nghệ thông tin, cờ hoặc hẹn đi câu cá..." required></textarea>
         <button id="submit-btn" type="submit" class="btn btn-glow" style="border: none; width: fit-content;">Gửi lời nhắn ngay</button>
         <div id="form-status" aria-live="polite"></div>
       </form>
     </section>
 
-    <section id="lien-lac" class="section-card reveal">
+    <section id="lien-lac" class="section-card reveal scroll-zoom">
       <span class="eyebrow">08 · GIỮ LIÊN LẠC</span>
-      <h2>Kết nối với tôi</h2>
+      <h2>Kết nối với Nguyễn Đức Nhật</h2>
       <p class="section-desc">Nếu bạn muốn gửi lời chào, trò chuyện về Công nghệ thông tin, Toán, cờ hay câu cá, hãy tìm đến tôi qua những kênh dưới đây.</p>
       <div class="btn-group" style="margin-bottom: 24px;">
         <a id="btn-fb-hello" href="https://www.facebook.com/profile.php?id=61576630427190" target="_blank" rel="noopener noreferrer" class="btn btn-glow">Gửi lời chào</a>
@@ -1458,16 +1483,16 @@
       </div>
     </section>
 
-    <section class="section-card footer-box reveal">
+    <section class="section-card footer-box reveal scroll-zoom">
       <span class="eyebrow">CẢM ƠN BẠN ĐÃ GHÉ THĂM</span>
       <h2>Rất vui vì bạn đã ở đây.</h2>
-      <p class="section-desc">Nếu có điều gì trong hành trình của tôi khiến bạn quan tâm, hãy gửi một lời chào hoặc cùng bắt đầu một cuộc trò chuyện.</p>
+      <p class="section-desc">Nếu có điều gì trong hành trình của Nguyễn Đức Nhật khiến bạn quan tâm, hãy gửi một lời chào hoặc cùng bắt đầu một cuộc trò chuyện.</p>
       <div class="btn-group">
         <a href="#kenh-lien-lac" class="btn btn-glow">Xem các trang cá nhân của tôi</a>
       </div>
       <div class="copyright">
         <strong>Nguyễn Đức Nhật</strong>
-        Học sinh lớp 7 · Trường TH&THCS Phúc Đồng
+        Học sinh lớp 7 · Trường TH&amp;THCS Phúc Đồng
       </div>
     </section>
   </main>
@@ -1482,27 +1507,30 @@
       return !document.body.classList.contains("fx-off") && !prefersReducedMotion;
     }
 
-    // 0. Màn hình khởi động Boot Bar
-    const bootScreen = document.getElementById("boot-screen");
-    const bootBarFill = document.getElementById("boot-bar-fill");
-    const bootPct = document.getElementById("boot-pct");
+    // 0. HUD khởi động 0.9 giây
+    const hudBoot = document.getElementById("hud-boot");
+    const hudBarFill = document.getElementById("hud-bar-fill");
+    const hudPct = document.getElementById("hud-pct");
 
-    function runBootScreen() {
+    function startHud09s() {
       if (!isFxActive()) {
-        bootScreen.classList.add("hidden");
+        hudBoot.classList.add("done");
         return;
       }
-      let pct = 0;
-      const timer = setInterval(() => {
-        pct += 20;
-        if (pct > 100) pct = 100;
-        bootBarFill.style.width = pct + "%";
-        bootPct.textContent = pct + "%";
-        if (pct >= 100) {
-          clearInterval(timer);
-          setTimeout(() => bootScreen.classList.add("hidden"), 180);
+      const duration = 900;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const pct = Math.round(progress * 100);
+        hudBarFill.style.width = pct + "%";
+        hudPct.textContent = pct + "%";
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          hudBoot.classList.add("done");
         }
-      }, 95);
+      }
+      requestAnimationFrame(tick);
     }
 
     // 1. Giao diện Sáng/Tối (có lưu localStorage)
@@ -1530,7 +1558,7 @@
       applyTheme(!document.body.classList.contains("dark-mode"), true);
     });
 
-    // 2. Mạng lưới hạt Cyber Network (dừng hẳn RAF khi tắt FX)
+    // 2. Mạng lưới hạt Cyber Network
     const canvas = document.getElementById("cyber-canvas");
     const ctx = canvas.getContext("2d");
     let particles = [];
@@ -1616,7 +1644,12 @@
       }
       if (isOff || prefersReducedMotion) {
         stopCyberLoop();
-        bootScreen.classList.add("hidden");
+        hudBoot.classList.add("done");
+        document.querySelectorAll(".scroll-zoom").forEach(el => {
+          el.style.setProperty("--zoom", "1");
+          el.style.setProperty("--zoom-glow", "0px");
+          el.style.setProperty("--zoom-glow-alpha", "0");
+        });
       } else {
         startCyberLoop();
       }
@@ -1625,31 +1658,41 @@
     let savedFx = null;
     try { savedFx = localStorage.getItem("nhat_fx"); } catch (_) {}
     applyFx(savedFx ? savedFx === "off" : prefersReducedMotion, false);
-    runBootScreen();
+    startHud09s();
 
     fxBtn.addEventListener("click", () => {
       applyFx(!document.body.classList.contains("fx-off"), true);
     });
 
-    // 4. Ký hiệu Toán & Code trôi nhẹ trên nền
-    const symbolsBox = document.getElementById("floating-symbols");
-    const symbols = ["01", "∑", "</>", "π", "{}", "&&", "√x", "0x1F"];
-    for (let i = 0; i < 12; i++) {
-      const span = document.createElement("span");
-      span.className = "symbol-item";
-      span.textContent = symbols[i % symbols.length];
-      span.style.left = `${(i * 8.5 + 3) % 96}%`;
-      span.style.animationDuration = `${16 + (i % 6) * 3}s`;
-      span.style.animationDelay = `${-(i * 2.5)}s`;
-      symbolsBox.appendChild(span);
-    }
+    // 4. Sao băng chạy rõ nét trên nền
+    const meteorField = document.getElementById("meteor-field");
+    const meteorPresets = [
+      { top: "6%", left: "82%", dur: "4.2s", delay: "-0.4s", w: "160px" },
+      { top: "14%", left: "95%", dur: "5.1s", delay: "-2.1s", w: "130px" },
+      { top: "24%", left: "74%", dur: "4.6s", delay: "-3.5s", w: "175px" },
+      { top: "36%", left: "92%", dur: "5.4s", delay: "-1.2s", w: "145px" },
+      { top: "48%", left: "86%", dur: "4.8s", delay: "-2.9s", w: "155px" },
+      { top: "62%", left: "96%", dur: "5.2s", delay: "-4.1s", w: "135px" },
+      { top: "74%", left: "78%", dur: "4.5s", delay: "-1.8s", w: "165px" },
+      { top: "10%", left: "58%", dur: "5.6s", delay: "-3.8s", w: "125px" }
+    ];
+    meteorPresets.forEach(cfg => {
+      const m = document.createElement("span");
+      m.className = "meteor";
+      m.style.top = cfg.top;
+      m.style.left = cfg.left;
+      m.style.width = cfg.w;
+      m.style.setProperty("--dur", cfg.dur);
+      m.style.setProperty("--delay", cfg.delay);
+      meteorField.appendChild(m);
+    });
 
     // 5. Typing Effect
     const phrases = [
-      "Học sinh lớp 7 · Trường TH&THCS Phúc Đồng",
+      "NGUYỄN ĐỨC NHẬT · Lớp 7 Trường TH&THCS Phúc Đồng",
       "Xuất sắc từ lớp 1 tới lớp 7 · Tài năng VioEdu",
       "Đam mê Toán học & Công nghệ thông tin",
-      "Ước mơ: Công an Công nghệ thông tin"
+      "Ước mơ: Chiến sĩ Công an Công nghệ thông tin"
     ];
     let pIdx = 0, cIdx = 0, isDeleting = false;
     const typingEl = document.getElementById("typing-text");
@@ -1679,7 +1722,7 @@
 
     // 6. Khung Terminal tương tác mini
     const cmdResponses = {
-      muc_tieu: "▶ Trở thành chiến sĩ Công an làm việc trong lĩnh vực Công nghệ thông tin & An ninh mạng.",
+      muc_tieu: "▶ Nguyễn Đức Nhật — Trở thành chiến sĩ Công an làm việc trong lĩnh vực Công nghệ thông tin & An ninh mạng.",
       thanh_tich: "▶ Xuất sắc từ lớp 1 tới lớp 7 (bản cứng) · VioEdu 2025–2026: Tài năng Chung kết 3 miền & Hoàn thành cấp Xã · 10 lần kiểm tra (23/07/2026).",
       vioedu: "▶ Tài năng Chung kết 3 miền & Hoàn thành cấp Xã (2025–2026), hoàn thành 10 lần kiểm tra (23/07/2026).",
       so_thich: "▶ Giải Toán, tự học lập trình HTML/CSS/JS, chơi cờ tư duy và câu cá rèn tính kiên nhẫn.",
@@ -1794,19 +1837,44 @@
       });
     });
 
-    // 12. Thanh tiến trình cuộn, Scroll-Spy menu & nút lên đầu trang
+    // 12. Thanh tiến trình cuộn, Phóng to rõ nét khi lại gần, Scroll-Spy & nút lên đầu trang
     const progressBar = document.getElementById("scroll-progress");
     const backToTopBtn = document.getElementById("back-to-top");
     const sections = document.querySelectorAll("main section[id]");
     const navAnchors = document.querySelectorAll("#nav-links a[href^='#']");
+    const zoomSections = document.querySelectorAll(".scroll-zoom");
+    let scrollTicking = false;
 
-    window.addEventListener("scroll", () => {
+    function updateScrollEffects() {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       progressBar.style.width = percent + "%";
 
       backToTopBtn.classList.toggle("show", scrollTop > 400);
+
+      if (isFxActive()) {
+        const vh = window.innerHeight || 1;
+        const centerY = vh * 0.5;
+        zoomSections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          const secCenter = rect.top + rect.height * 0.5;
+          const dist = Math.min(Math.abs(secCenter - centerY) / (vh * 0.65), 1);
+          const closeness = 1 - dist; // 1 = đúng giữa màn hình (gần nhất), 0 = xa
+          const zoom = 0.91 + closeness * 0.16; // 0.91 -> 1.07 rõ rệt
+          const glowSize = Math.round(closeness * 34);
+          const glowAlpha = (closeness * 0.28).toFixed(2);
+          sec.style.setProperty("--zoom", zoom.toFixed(3));
+          sec.style.setProperty("--zoom-glow", `${glowSize}px`);
+          sec.style.setProperty("--zoom-glow-alpha", glowAlpha);
+        });
+      } else {
+        zoomSections.forEach(sec => {
+          sec.style.setProperty("--zoom", "1");
+          sec.style.setProperty("--zoom-glow", "0px");
+          sec.style.setProperty("--zoom-glow-alpha", "0");
+        });
+      }
 
       let currentId = "";
       sections.forEach(sec => {
@@ -1817,7 +1885,17 @@
       navAnchors.forEach(a => {
         a.classList.toggle("active", a.getAttribute("href") === `#${currentId}`);
       });
-    });
+
+      scrollTicking = false;
+    }
+
+    window.addEventListener("scroll", () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(updateScrollEffects);
+        scrollTicking = true;
+      }
+    }, { passive: true });
+    updateScrollEffects();
 
     backToTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
@@ -1889,7 +1967,7 @@
         if (response.ok) {
           statusEl.style.display = "block";
           statusEl.style.color = "var(--emerald)";
-          statusEl.textContent = "✅ Đã gửi lời nhắn thành công! Nhật sẽ phản hồi bạn sớm nhất nhé.";
+          statusEl.textContent = "✅ Đã gửi lời nhắn thành công! Nguyễn Đức Nhật sẽ phản hồi bạn sớm nhất nhé.";
           const rect = submitBtn.getBoundingClientRect();
           spawnSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
           form.reset();
