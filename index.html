@@ -4,47 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nguyễn Đức Nhật — Định hướng Công an Công nghệ thông tin</title>
-  <meta name="description" content="Trang cá nhân của Nguyễn Đức Nhật, học sinh lớp 7 Trường TH&THCS Phúc Đồng. Yêu thích Toán học, Công nghệ thông tin, VioEdu và ước mơ trở thành chiến sĩ Công an CNTT.">
+  <meta name="description" content="Trang cá nhân của Nguyễn Đức Nhật, học sinh lớp 7 Trường TH&THCS Phúc Đồng. Liên tục Xuất sắc từ lớp 1 tới lớp 7, chứng nhận VioEdu và định hướng Công an Công nghệ thông tin.">
   <meta property="og:title" content="Nguyễn Đức Nhật — Định hướng Công an Công nghệ thông tin">
-  <meta property="og:description" content="Học sinh lớp 7 Trường TH&THCS Phúc Đồng · Đam mê Toán & CNTT · Thành tích VioEdu & Xuất sắc liên tiếp.">
+  <meta property="og:description" content="Học sinh lớp 7 Trường TH&THCS Phúc Đồng · Xuất sắc từ lớp 1 đến lớp 7 · Tài năng VioEdu · Định hướng Công an CNTT.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #f4f7fb;
+      --bg: #eef3f9;
       --surface: #ffffff;
       --surface-alt: #f8fafc;
-      --text: #0f172a;
+      --text: #0b1220;
       --muted: #475569;
-      --primary: #2563eb;
-      --secondary: #0ea5e9;
-      --emerald: #10b981;
-      --accent-bg: #eff6ff;
-      --border: #e2e8f0;
-      --nav-bg: rgba(255, 255, 255, 0.88);
-      --shadow: 0 12px 32px -12px rgba(15, 23, 42, 0.08);
-      --glow-color: rgba(37, 99, 235, 0.14);
-      --grid-line: rgba(37, 99, 235, 0.05);
+      --primary: #0284c7;
+      --secondary: #2563eb;
+      --emerald: #059669;
+      --accent-bg: rgba(2, 132, 199, 0.1);
+      --border: #dbe4f0;
+      --nav-bg: rgba(255, 255, 255, 0.86);
+      --shadow: 0 18px 40px -16px rgba(11, 18, 32, 0.14);
+      --glow-color: rgba(2, 132, 199, 0.16);
+      --grid-line: rgba(2, 132, 199, 0.06);
     }
 
     body.dark-mode {
-      --bg: #070b14;
-      --surface: #0f172a;
-      --surface-alt: #1e293b;
+      --bg: #050811;
+      --surface: #0b1120;
+      --surface-alt: #111a2e;
       --text: #f8fafc;
       --muted: #94a3b8;
       --primary: #38bdf8;
-      --secondary: #818cf8;
+      --secondary: #60a5fa;
       --emerald: #34d399;
       --accent-bg: rgba(56, 189, 248, 0.14);
       --border: #1e293b;
-      --nav-bg: rgba(15, 23, 42, 0.88);
-      --shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
-      --glow-color: rgba(56, 189, 248, 0.18);
+      --nav-bg: rgba(11, 17, 32, 0.86);
+      --shadow: 0 22px 52px -16px rgba(0, 0, 0, 0.8);
+      --glow-color: rgba(56, 189, 248, 0.22);
       --grid-line: rgba(56, 189, 248, 0.06);
     }
 
@@ -71,31 +71,103 @@
       background-image:
         linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
         linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
-        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.09) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.09) 0px, transparent 50%);
-      background-size: 32px 32px, 32px 32px, auto, auto;
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.12), transparent 42%),
+        radial-gradient(circle at 88% 15%, rgba(16, 185, 129, 0.1), transparent 40%);
+      background-size: 36px 36px, 36px 36px, auto, auto;
       background-attachment: fixed;
     }
 
     body.fx-off .radar-ring,
+    body.fx-off .radar-ring-outer,
     body.fx-off .avatar-scan,
     body.fx-off .shield-svg,
     body.fx-off #cyber-canvas,
-    body.fx-off .floating-symbols {
+    body.fx-off .floating-symbols,
+    body.fx-off #boot-screen,
+    body.fx-off .anim-float,
+    body.fx-off .anim-pulse-svg,
+    body.fx-off .anim-sweep {
       display: none !important;
       animation: none !important;
     }
 
+    body.fx-off .unfold-box,
+    body.fx-off .stagger-timeline .timeline-item {
+      opacity: 1 !important;
+      clip-path: none !important;
+      transform: none !important;
+      transition-delay: 0s !important;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .radar-ring, .avatar-scan, .shield-svg, #cyber-canvas, .floating-symbols, .pulse-dot, .hero-card h1 {
+      #boot-screen, .radar-ring, .radar-ring-outer, .avatar-scan, .shield-svg,
+      #cyber-canvas, .floating-symbols, .pulse-dot, .hero-title,
+      .anim-float, .anim-pulse-svg, .anim-sweep {
+        display: none !important;
         animation: none !important;
       }
-      .reveal {
+      .reveal, .unfold-box, .stagger-timeline .timeline-item {
         opacity: 1 !important;
+        clip-path: none !important;
         transform: none !important;
         transition: none !important;
       }
+    }
+
+    /* Màn hình khởi động Cyber Boot (nhịp kiểu thanh nạp ngang) */
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background: #04070f;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 20px;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+    #boot-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .boot-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+    }
+    .boot-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #38bdf8;
+      text-align: center;
+    }
+    .boot-bar-wrap {
+      width: min(340px, 84vw);
+      height: 5px;
+      background: rgba(56, 189, 248, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.38);
+    }
+    .boot-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2563eb, #38bdf8, #34d399);
+      box-shadow: 0 0 14px #38bdf8;
+      transition: width 0.14s ease-out;
+    }
+    .boot-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #34d399;
     }
 
     /* Ký hiệu Toán & Code trôi nhẹ trên nền */
@@ -110,9 +182,9 @@
       position: absolute;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--primary);
-      opacity: 0.11;
+      opacity: 0.1;
       will-change: transform;
       animation: driftUp linear infinite;
     }
@@ -131,7 +203,7 @@
       background: linear-gradient(90deg, #2563eb, #38bdf8, #10b981);
       z-index: 9999;
       transition: width 0.1s ease-out;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
     }
 
     /* Sóng năng lượng nhẹ khi click */
@@ -150,7 +222,7 @@
       to { transform: translate(-50%, -50%) scale(4); opacity: 0; }
     }
 
-    /* Thanh điều hướng */
+    /* Thanh điều hướng HUD */
     .navbar-wrapper {
       position: sticky;
       top: 12px;
@@ -159,20 +231,20 @@
       width: 100%;
     }
     .navbar {
-      max-width: 920px;
+      max-width: 980px;
       margin: 0 auto;
       background: var(--nav-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 10px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
     }
     .nav-brand {
       font-family: 'JetBrains Mono', monospace;
@@ -181,10 +253,11 @@
       color: var(--primary);
       text-decoration: none;
       flex-shrink: 0;
+      letter-spacing: 0.02em;
     }
     .nav-links {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -193,7 +266,7 @@
       font-weight: 600;
       color: var(--muted);
       text-decoration: none;
-      padding: 5px 8px;
+      padding: 5px 9px;
       border-radius: 8px;
       transition: all 0.2s ease;
     }
@@ -208,7 +281,7 @@
       color: var(--text);
       padding: 6px 12px;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
       cursor: pointer;
       transition: transform 0.2s ease, border-color 0.2s ease;
@@ -218,7 +291,7 @@
       border-color: var(--primary);
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
       .navbar-wrapper { top: 8px; padding: 0 8px; }
       .navbar {
         padding: 8px 12px;
@@ -226,7 +299,7 @@
         flex-wrap: nowrap;
         gap: 8px;
       }
-      .nav-brand { font-size: 0.85rem; }
+      .nav-brand { font-size: 0.84rem; }
       .nav-links {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -251,34 +324,121 @@
 
     .container {
       width: 100%;
-      max-width: 944px;
+      max-width: 1004px;
       margin: 0 auto;
-      padding: 24px 12px 64px;
+      padding: 22px 12px 72px;
       position: relative;
       z-index: 2;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
 
+    /* Hiệu ứng khung ảnh / thẻ tự bung mở & chuyển động liên tục */
+    .unfold-box {
+      opacity: 0;
+      clip-path: inset(12% 6% 12% 6% round 20px);
+      transform: scale(0.95) translateY(16px);
+      transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.65s ease,
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s ease,
+                  box-shadow 0.25s ease;
+    }
+    .reveal.active .unfold-box {
+      opacity: 1;
+      clip-path: inset(0% 0% 0% 0% round 16px);
+      transform: scale(1) translateY(0);
+    }
+    .reveal.active .unfold-box:nth-child(1) { transition-delay: 0.08s; }
+    .reveal.active .unfold-box:nth-child(2) { transition-delay: 0.20s; }
+    .reveal.active .unfold-box:nth-child(3) { transition-delay: 0.32s; }
+
+    .anim-banner {
+      position: relative;
+      height: 112px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: linear-gradient(125deg, #061024 0%, #0e2547 52%, #062826 100%);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .anim-sweep {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 20%, rgba(56, 189, 248, 0.22) 50%, transparent 80%);
+      transform: translateX(-120%);
+      animation: sweepLight 4.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes sweepLight {
+      0% { transform: translateX(-120%); }
+      55%, 100% { transform: translateX(130%); }
+    }
+    .anim-float {
+      animation: floatArt 3.6s ease-in-out infinite;
+    }
+    @keyframes floatArt {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-5px) scale(1.04); }
+    }
+    .anim-pulse-svg {
+      animation: pulseArt 2.8s ease-in-out infinite;
+    }
+    @keyframes pulseArt {
+      0%, 100% { transform: scale(0.97); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+
+    /* Hero Cyber Command Center */
     .hero-card {
-      background: linear-gradient(135deg, #060b16 0%, #132038 55%, #0c192e 100%);
+      background:
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.24), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.18), transparent 45%),
+        linear-gradient(135deg, #040812 0%, #0b162c 52%, #081224 100%);
       color: #ffffff;
-      border-radius: 24px;
-      padding: 48px 38px;
+      border-radius: 26px;
+      padding: 46px 40px;
       margin-bottom: 24px;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 24px 50px -15px rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(56, 189, 248, 0.42);
+      box-shadow: 0 28px 60px -18px rgba(4, 8, 18, 0.78);
     }
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-color: #38bdf8;
+      border-style: solid;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-card::before {
+      top: 14px;
+      left: 14px;
+      border-width: 2px 0 0 2px;
+      border-top-left-radius: 8px;
+    }
+    .hero-card::after {
+      bottom: 14px;
+      right: 14px;
+      border-width: 0 2px 2px 0;
+      border-bottom-right-radius: 8px;
+    }
+
     #cyber-canvas {
       position: absolute;
       top: 0;
@@ -286,7 +446,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      opacity: 0.45;
+      opacity: 0.48;
       z-index: 0;
     }
     .hero-content { position: relative; z-index: 1; }
@@ -306,17 +466,17 @@
 
     .cyber-badge-card {
       flex-shrink: 0;
-      width: 126px;
-      height: 126px;
-      border-radius: 26px;
-      background: radial-gradient(circle at 30% 20%, rgba(56, 189, 248, 0.22), rgba(15, 23, 42, 0.85));
-      border: 1.5px solid rgba(56, 189, 248, 0.5);
+      width: 142px;
+      height: 142px;
+      border-radius: 28px;
+      background: radial-gradient(circle at 30% 20%, rgba(56, 189, 248, 0.25), rgba(11, 17, 32, 0.92));
+      border: 1.5px solid rgba(56, 189, 248, 0.55);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.5), inset 0 0 24px rgba(56, 189, 248, 0.16);
     }
     .cyber-badge-card img {
       width: 100%;
@@ -331,24 +491,36 @@
       width: 96px;
       height: 96px;
       border-radius: 50%;
-      border: 1px dashed rgba(52, 211, 153, 0.45);
+      border: 1px dashed rgba(52, 211, 153, 0.5);
       animation: spinSlow 14s linear infinite;
+    }
+    .radar-ring-outer {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px dotted rgba(56, 189, 248, 0.42);
+      animation: spinReverse 20s linear infinite;
     }
     @keyframes spinSlow {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+    @keyframes spinReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
     .shield-svg {
-      width: 68px;
-      height: 68px;
+      width: 74px;
+      height: 74px;
       position: relative;
       z-index: 1;
-      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.55));
+      filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.65));
       animation: floatShield 3.4s ease-in-out infinite;
     }
     @keyframes floatShield {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
+      50% { transform: translateY(-5px); }
     }
     .avatar-scan {
       position: absolute;
@@ -376,10 +548,11 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       font-weight: 700;
+      letter-spacing: 0.05em;
       padding: 6px 14px;
       border-radius: 999px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(52, 211, 153, 0.35);
+      margin-bottom: 14px;
+      border: 1px solid rgba(52, 211, 153, 0.38);
     }
     .pulse-dot {
       width: 8px;
@@ -394,13 +567,15 @@
       100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
     }
 
-    .hero-card h1 {
-      font-size: clamp(2.1rem, 5vw, 3.25rem);
+    .hero-title {
+      font-family: 'Barlow Condensed', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.7rem, 6.4vw, 4.2rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.18;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 1.05;
       margin-bottom: 10px;
-      background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 50%, #34d399 100%);
+      background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 48%, #34d399 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -414,7 +589,7 @@
 
     .typing-wrapper {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.9rem, 2.4vw, 1.08rem);
+      font-size: clamp(0.88rem, 2.3vw, 1.05rem);
       font-weight: 700;
       color: #38bdf8;
       margin-bottom: 16px;
@@ -433,18 +608,19 @@
     .hero-desc {
       color: #cbd5e1;
       font-size: 1.02rem;
-      max-width: 650px;
+      max-width: 680px;
       margin-bottom: 20px;
     }
 
     .mini-terminal {
-      background: rgba(2, 6, 23, 0.78);
-      border: 1px solid rgba(56, 189, 248, 0.28);
+      background: rgba(2, 6, 23, 0.84);
+      border: 1px solid rgba(56, 189, 248, 0.34);
       border-radius: 16px;
       padding: 14px 16px;
       margin-bottom: 22px;
-      max-width: 720px;
+      max-width: 760px;
       font-family: 'JetBrains Mono', monospace;
+      box-shadow: inset 0 0 20px rgba(2, 6, 23, 0.65);
     }
     .term-cmds {
       display: flex;
@@ -455,7 +631,7 @@
     .cmd-chip {
       background: rgba(56, 189, 248, 0.12);
       color: #7dd3fc;
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.32);
       border-radius: 8px;
       padding: 4px 10px;
       font-size: 0.76rem;
@@ -487,20 +663,22 @@
       .stats-bar { grid-template-columns: repeat(4, 1fr); }
     }
     .stat-item {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.22);
       border-radius: 14px;
       padding: 14px 16px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
     .stat-item:hover {
       transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.45);
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
     }
     .stat-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-family: 'Barlow Condensed', 'JetBrains Mono', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
       color: #38bdf8;
       display: block;
     }
@@ -514,29 +692,33 @@
       margin-bottom: 22px;
       box-shadow: var(--shadow);
       overflow: hidden;
+      position: relative;
     }
     .eyebrow {
       display: inline-block;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--primary);
       background: var(--accent-bg);
       padding: 5px 12px;
       border-radius: 999px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     h2 {
-      font-size: clamp(1.5rem, 3.5vw, 2.05rem);
+      font-family: 'Barlow Condensed', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.8rem, 4.2vw, 2.4rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 1.12;
       margin-bottom: 10px;
     }
     .section-desc {
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 1.01rem;
       margin-bottom: 24px;
     }
 
@@ -547,8 +729,8 @@
       justify-content: center;
       padding: 12px 22px;
       border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.94rem;
+      font-weight: 700;
+      font-size: 0.93rem;
       text-decoration: none;
       transition: all 0.25s ease;
       position: relative;
@@ -558,19 +740,19 @@
     .btn-glow {
       background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
       color: #fff;
-      box-shadow: 0 6px 18px -4px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.55);
     }
     .btn-glow:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 24px -4px rgba(37, 99, 235, 0.65);
+      box-shadow: 0 12px 26px -4px rgba(14, 165, 233, 0.7);
     }
     .btn-glass {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.1);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.35);
     }
     .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(56, 189, 248, 0.18);
       transform: translateY(-2px);
     }
     .btn-outline {
@@ -601,16 +783,17 @@
       background: var(--surface-alt);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 22px;
+      padding: 20px;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+      transform-style: preserve-3d;
+      transition: transform 0.22s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .bento-box::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(360px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--glow-color), transparent 45%);
+      background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--glow-color), transparent 45%);
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -618,8 +801,7 @@
     .bento-box:hover::before { opacity: 1; }
     .bento-box:hover {
       border-color: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px -10px rgba(37, 99, 235, 0.18);
+      box-shadow: 0 16px 34px -12px rgba(2, 132, 199, 0.24);
     }
     .box-icon {
       font-size: 1.5rem;
@@ -635,7 +817,7 @@
     }
     .bento-box p {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
     .mini-tag {
@@ -645,8 +827,8 @@
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--emerald);
-      background: rgba(16, 185, 129, 0.12);
-      padding: 3px 9px;
+      background: rgba(16, 185, 129, 0.14);
+      padding: 3px 10px;
       border-radius: 999px;
     }
 
@@ -706,7 +888,7 @@
       border-radius: 50%;
       background: var(--primary);
       border: 2px solid var(--surface);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.28);
     }
     .timeline-badge {
       font-family: 'JetBrains Mono', monospace;
@@ -717,21 +899,21 @@
       display: block;
     }
     .dream-spotlight {
-      border-color: rgba(16, 185, 129, 0.55);
-      box-shadow: 0 0 24px -6px rgba(16, 185, 129, 0.28);
+      border-color: rgba(16, 185, 129, 0.58);
+      box-shadow: 0 0 28px -6px rgba(16, 185, 129, 0.32);
     }
 
     /* Time-lapse chạy từ từ từng khối khi hiện ra */
     .stagger-timeline .timeline-item {
       opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(20px) scale(0.985);
       transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
                   border-color 0.25s ease;
     }
     .reveal.active .stagger-timeline .timeline-item {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
     .reveal.active .stagger-timeline .timeline-item:nth-child(1) { transition-delay: 0.08s; }
     .reveal.active .stagger-timeline .timeline-item:nth-child(2) { transition-delay: 0.22s; }
@@ -739,12 +921,6 @@
     .reveal.active .stagger-timeline .timeline-item:nth-child(4) { transition-delay: 0.50s; }
     .reveal.active .stagger-timeline .timeline-item:nth-child(5) { transition-delay: 0.64s; }
     .reveal.active .stagger-timeline .timeline-item:nth-child(6) { transition-delay: 0.78s; }
-
-    body.fx-off .stagger-timeline .timeline-item {
-      opacity: 1 !important;
-      transform: none !important;
-      transition-delay: 0s !important;
-    }
 
     .faq-list { display: flex; flex-direction: column; gap: 10px; }
     .faq-item {
@@ -830,7 +1006,7 @@
     }
     .form-input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
     }
 
     #form-status {
@@ -890,6 +1066,15 @@
   </style>
 </head>
 <body>
+  <div id="boot-screen" aria-hidden="true">
+    <div class="boot-brand">DUC_NHAT // HUD</div>
+    <div class="boot-label">BOOTING CYBER PORTFOLIO LAYER...</div>
+    <div class="boot-bar-wrap">
+      <div id="boot-bar-fill" class="boot-bar-fill"></div>
+    </div>
+    <div id="boot-pct" class="boot-pct">0%</div>
+  </div>
+
   <div id="scroll-progress"></div>
   <div class="floating-symbols" id="floating-symbols" aria-hidden="true"></div>
 
@@ -916,7 +1101,7 @@
         <div class="hero-top">
           <div>
             <span class="badge-tech"><span class="pulse-dot"></span> 🛡️ CÔNG AN CÔNG NGHỆ THÔNG TIN</span>
-            <h1 class="scramble-text" data-value="Nguyễn Đức Nhật">Nguyễn Đức Nhật</h1>
+            <h1 class="hero-title scramble-text" data-value="NGUYỄN ĐỨC NHẬT">NGUYỄN ĐỨC NHẬT</h1>
             <div class="typing-wrapper">
               <span id="typing-text"></span><span class="cursor" aria-hidden="true">&nbsp;</span>
             </div>
@@ -925,6 +1110,7 @@
           <div class="cyber-badge-card" title="Định hướng An ninh mạng & Công nghệ thông tin">
             <img id="avatar-img" src="avatar.jpg" alt="Nguyễn Đức Nhật" onload="this.style.display='block'; document.getElementById('shield-default').style.display='none';" onerror="this.style.display='none';">
             <div id="shield-default" style="display:flex; align-items:center; justify-content:center;">
+              <div class="radar-ring-outer"></div>
               <div class="radar-ring"></div>
               <svg class="shield-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <defs>
@@ -933,7 +1119,7 @@
                     <stop offset="100%" stop-color="#10b981"/>
                   </linearGradient>
                 </defs>
-                <path d="M32 6L52 14V30C52 43.5 43.4 55.2 32 59C20.6 55.2 12 43.5 12 30V14L32 6Z" fill="rgba(56, 189, 248, 0.14)" stroke="url(#shieldGrad)" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M32 6L52 14V30C52 43.5 43.4 55.2 32 59C20.6 55.2 12 43.5 12 30V14L32 6Z" fill="rgba(56, 189, 248, 0.16)" stroke="url(#shieldGrad)" stroke-width="2.6" stroke-linejoin="round"/>
                 <path d="M25 27L20 32L25 37M39 27L44 32L39 37M34 24L30 40" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
@@ -941,7 +1127,7 @@
           </div>
         </div>
 
-        <p class="hero-desc">Tôi là Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi yêu thích môn Toán, đam mê Công nghệ thông tin và nuôi dưỡng ước mơ trở thành chiến sĩ Công an làm việc trong lĩnh vực An ninh mạng.</p>
+        <p class="hero-desc">Tôi là Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi duy trì danh hiệu Xuất sắc từ lớp 1 tới lớp 7, yêu thích Toán học & Công nghệ thông tin, có chứng nhận VioEdu và hướng tới trở thành chiến sĩ Công an Công nghệ thông tin.</p>
 
         <div class="mini-terminal">
           <div class="term-cmds">
@@ -961,16 +1147,16 @@
 
         <div class="stats-bar">
           <div class="stat-item">
-            <span class="stat-num count-up" data-prefix="Lớp " data-target="7" data-suffix="">Lớp 7</span>
-            <span class="stat-label">TH&THCS Phúc Đồng</span>
+            <span class="stat-num count-up" data-prefix="Lớp 1 → " data-target="7" data-suffix="">Lớp 1 → 7</span>
+            <span class="stat-label">Xuất sắc liên tiếp</span>
           </div>
           <div class="stat-item">
             <span class="stat-num">VioEdu</span>
             <span class="stat-label">Tài năng 3 miền</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">Toán & IT</span>
-            <span class="stat-label">Đam mê cốt lõi</span>
+            <span class="stat-num">Lớp 7</span>
+            <span class="stat-label">TH&THCS Phúc Đồng</span>
           </div>
           <div class="stat-item">
             <span class="stat-num count-up" data-prefix="" data-target="100" data-suffix="%">100%</span>
@@ -983,22 +1169,42 @@
     <section id="cau-chuyen" class="section-card reveal">
       <span class="eyebrow">01 · CÂU CHUYỆN</span>
       <h2>Tôi là ai</h2>
-      <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại trường TH&THCS Phúc Đồng. Tôi thích tư duy logic của Toán học và luôn tò mò về cách thế giới công nghệ vận hành.</p>
+      <p class="section-desc">Tôi là Nguyễn Đức Nhật, học sinh lớp 7 tại Trường TH&THCS Phúc Đồng. Tôi thích tư duy logic của Toán học và luôn tò mò về cách thế giới công nghệ vận hành.</p>
       <div class="grid-3">
-        <div class="bento-box interactive-card">
-          <span class="box-icon">🚀</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <svg class="anim-float" width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <circle cx="32" cy="32" r="22" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5 5"/>
+              <path d="M22 42L42 22M42 22H28M42 22V36" stroke="#34d399" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <h3>Hành trình học tập</h3>
-          <p>Tôi tích cực tham gia đấu trường VioEdu và tự tìm hiểu lập trình web để rèn luyện tư duy giải quyết vấn đề.</p>
+          <p>Liên tục đạt Xuất sắc từ lớp 1 tới lớp 7, tích cực tham gia đấu trường VioEdu và tự học lập trình web.</p>
         </div>
-        <div class="bento-box interactive-card">
-          <span class="box-icon">💻</span>
+
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <svg class="anim-pulse-svg" width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <rect x="12" y="16" width="40" height="32" rx="6" stroke="#38bdf8" stroke-width="2.4"/>
+              <path d="M24 28L19 32L24 36M40 28L45 32L40 36M34 25L30 39" stroke="#7dd3fc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <h3>Điều tôi quan tâm</h3>
-          <p>Tôi đam mê Công nghệ thông tin, thích tự mày mò viết mã, bên cạnh việc chơi cờ và đi câu cá lúc rảnh.</p>
+          <p>Đam mê Công nghệ thông tin và Toán học, thích tự tay làm web, bên cạnh chơi cờ và đi câu cá lúc rảnh.</p>
         </div>
-        <div class="bento-box interactive-card">
-          <span class="box-icon">🛡️</span>
+
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <svg class="anim-float" width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <path d="M32 10L48 16.5V29.5C48 40.2 41.2 49.6 32 53C22.8 49.6 16 40.2 16 29.5V16.5L32 10Z" stroke="#34d399" stroke-width="2.4" fill="rgba(52,211,153,0.12)"/>
+              <path d="M25 32L30 37L40 27" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
           <h3>Giá trị theo đuổi</h3>
-          <p>Tôi luôn giữ tinh thần kỷ luật, học tập chăm chỉ, trung thực và đối xử tử tế với bạn bè.</p>
+          <p>Luôn giữ tinh thần kỷ luật, học tập chăm chỉ, trung thực và đối xử tử tế với thầy cô, bạn bè.</p>
         </div>
       </div>
     </section>
@@ -1008,7 +1214,7 @@
       <h2>Hành trang tôi đang rèn luyện</h2>
       <p class="section-desc">Kết hợp giữa kiến thức Công nghệ thông tin, tư duy Toán học và tinh thần kỷ luật để hướng tới mục tiêu tương lai.</p>
       <div class="grid-3">
-        <div class="bento-box interactive-card">
+        <div class="bento-box unfold-box interactive-card tilt-card">
           <span class="group-title">💻 Kỹ năng Công nghệ</span>
           <div class="tag-cloud">
             <span class="skill-tag">HTML & CSS cơ bản</span>
@@ -1017,7 +1223,7 @@
             <span class="skill-tag">Ứng dụng AI & Tin học</span>
           </div>
         </div>
-        <div class="bento-box interactive-card">
+        <div class="bento-box unfold-box interactive-card tilt-card">
           <span class="group-title">🧠 Kỹ năng mềm & Tư duy</span>
           <div class="tag-cloud">
             <span class="skill-tag">Giải quyết vấn đề</span>
@@ -1026,7 +1232,7 @@
             <span class="skill-tag">Tư duy logic</span>
           </div>
         </div>
-        <div class="bento-box interactive-card">
+        <div class="bento-box unfold-box interactive-card tilt-card">
           <span class="group-title">💪 Kỷ luật & Thể chất</span>
           <div class="tag-cloud">
             <span class="skill-tag">Bản lĩnh & Cầu tiến</span>
@@ -1042,20 +1248,29 @@
       <h2>Những điều làm nên con người tôi</h2>
       <p class="section-desc">Mỗi sở thích không chỉ để giải trí mà còn giúp tôi rèn luyện những phẩm chất cần thiết cho ước mơ sau này.</p>
       <div class="grid-3">
-        <div class="bento-box interactive-card">
-          <span class="box-icon">📐</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <span class="anim-float" style="font-size: 2.3rem;">📐</span>
+          </div>
           <h3>Toán học & Lập trình</h3>
-          <p>Tôi thích cảm giác chinh phục những bài toán khó trên VioEdu và tự tay viết từng dòng mã HTML/CSS để xây dựng trang web của riêng mình.</p>
+          <p>Thích chinh phục các bài toán trên VioEdu và tự tay viết HTML/CSS/JS để tạo trang web của riêng mình.</p>
         </div>
-        <div class="bento-box interactive-card">
-          <span class="box-icon">♟️</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <span class="anim-pulse-svg" style="font-size: 2.3rem;">♟️</span>
+          </div>
           <h3>Chiến thuật trên bàn cờ</h3>
-          <p>Những ván cờ lúc rảnh rỗi giúp tôi học cách quan sát toàn cục, phán đoán nước đi của đối thủ và luôn giữ cái đầu lạnh trước mọi tình huống.</p>
+          <p>Những ván cờ giúp rèn khả năng quan sát, tính toán nước đi và giữ sự bình tĩnh trước mọi tình huống.</p>
         </div>
-        <div class="bento-box interactive-card">
-          <span class="box-icon">🎣</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <span class="anim-float" style="font-size: 2.3rem;">🎣</span>
+          </div>
           <h3>Kiên nhẫn khi đi câu cá</h3>
-          <p>Đi câu cá giúp tôi thư giãn sau những giờ học căng thẳng, đồng thời rèn luyện sự tập trung cao độ và đức tính kiên nhẫn chờ đợi thành quả.</p>
+          <p>Đi câu cá giúp thư giãn sau giờ học, đồng thời rèn sự tập trung và đức tính kiên nhẫn chờ đợi thành quả.</p>
         </div>
       </div>
     </section>
@@ -1065,15 +1280,15 @@
       <h2>3 Nguyên tắc tôi luôn giữ vững</h2>
       <p class="section-desc">Để trở thành một chiến sĩ Công an Công nghệ thông tin trong tương lai, tôi tự đặt ra cho mình những kỷ luật ngay từ hôm nay.</p>
       <div class="grid-3">
-        <div class="bento-box interactive-card" style="border-top: 3px solid var(--primary);">
+        <div class="bento-box unfold-box interactive-card tilt-card" style="border-top: 3px solid var(--primary);">
           <h3>01. Kỷ luật tự giác</h3>
           <p>Luôn hoàn thành bài tập đúng hạn, tự giác ôn luyện Toán và Tin học mỗi ngày mà không cần ai nhắc nhở.</p>
         </div>
-        <div class="bento-box interactive-card" style="border-top: 3px solid var(--secondary);">
+        <div class="bento-box unfold-box interactive-card tilt-card" style="border-top: 3px solid var(--secondary);">
           <h3>02. Không ngại thử thách</h3>
           <p>Gặp bài toán khó hay lỗi lập trình không nản lòng, sẵn sàng tìm tòi cách giải mới và học hỏi từ thầy cô, bạn bè.</p>
         </div>
-        <div class="bento-box interactive-card" style="border-top: 3px solid var(--emerald);">
+        <div class="bento-box unfold-box interactive-card tilt-card" style="border-top: 3px solid var(--emerald);">
           <h3>03. Trung thực & Chân thành</h3>
           <p>Luôn sống ngay thẳng, sẵn sàng giúp đỡ bạn bè trong học tập và giữ tinh thần đoàn kết trong mọi hoạt động tập thể.</p>
         </div>
@@ -1083,54 +1298,63 @@
     <section id="thanh-tich-timelapse" class="section-card reveal">
       <span class="eyebrow">05 · THÀNH TÍCH & TIME-LAPSE HÀNH TRÌNH</span>
       <h2>Cột mốc đã đạt được & Hướng đi tương lai</h2>
-      <p class="section-desc">Các dấu ấn VioEdu, thành tích Xuất sắc (bản cứng đang lưu giữ) và hành trình từng bước chạy từ từ từ khởi đầu đến lớp 7 và tương lai.</p>
+      <p class="section-desc">Thành tích Xuất sắc từ lớp 1 tới lớp 7 (bản cứng đang lưu giữ), các chứng nhận VioEdu và time-lapse chạy từ từ từng khối.</p>
 
       <div class="grid-3" style="margin-bottom: 24px;">
-        <div class="bento-box interactive-card">
-          <span class="box-icon">🏆</span>
-          <h3>Thành tích Xuất sắc (Bản cứng)</h3>
-          <p>Liên tục đạt danh hiệu Xuất sắc, giữ vững sự đều đặn trong học tập; các giấy khen bản cứng hiện đang lưu giữ thực tế.</p>
-          <span class="mini-tag">Bản cứng lưu giữ</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <span class="anim-float" style="font-size: 2.3rem;">🏆</span>
+          </div>
+          <h3>Xuất sắc từ lớp 1 tới lớp 7</h3>
+          <p>Liên tục đạt danh hiệu Xuất sắc suốt từ lớp 1 đến lớp 7 hiện tại; các giấy khen bản cứng đang lưu giữ thực tế.</p>
+          <span class="mini-tag">Lớp 1 → Lớp 7 · Bản cứng</span>
         </div>
 
-        <div class="bento-box interactive-card">
-          <span class="box-icon">🌟</span>
-          <h3>Chung kết 3 miền VioEdu (2025–2026)</h3>
-          <p>Đạt thành tích <strong>Tài năng</strong> tại vòng thi tuyển chọn trực tuyến Chung kết 3 miền Đấu trường VioEdu năm học 2025–2026 (lớp 6C).</p>
-          <span class="mini-tag">Chứng nhận VioEdu</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <span class="anim-pulse-svg" style="font-size: 2.3rem;">🌟</span>
+          </div>
+          <h3>Chung kết 3 miền VioEdu</h3>
+          <p>Đạt thành tích <strong>Tài năng</strong> tại vòng thi tuyển chọn trực tuyến Chung kết 3 miền VioEdu năm học 2025–2026 (lớp 6C).</p>
+          <span class="mini-tag">Tài năng · 2025–2026</span>
         </div>
 
-        <div class="bento-box interactive-card">
-          <span class="box-icon">📝</span>
-          <h3>Vòng cấp Xã & 10 lần kiểm tra</h3>
-          <p>Đạt thành tích <strong>Hoàn thành</strong> vòng cấp Xã/Phường/Đặc khu (Hương Bình, Hà Tĩnh, 2025–2026)[cite: 4] và hoàn thành 10 lần kiểm tra (23/07/2026)[cite: 2].</p>
-          <span class="mini-tag">Chứng nhận VioEdu</span>
+        <div class="bento-box unfold-box interactive-card tilt-card">
+          <div class="anim-banner">
+            <div class="anim-sweep"></div>
+            <span class="anim-float" style="font-size: 2.3rem;">📝</span>
+          </div>
+          <h3>Cấp Xã & 10 lần kiểm tra</h3>
+          <p>Đạt <strong>Hoàn thành</strong> vòng cấp Xã (Hương Bình, Hà Tĩnh, 2025–2026) và hoàn thành 10 lần kiểm tra VioEdu (23/07/2026).</p>
+          <span class="mini-tag">Hoàn thành · 23/07/2026</span>
         </div>
       </div>
 
       <div class="timeline stagger-timeline">
         <div class="timeline-item">
-          <span class="timeline-badge">BƯỚC 01 · NỀN TẢNG & BẢN CỨNG</span>
-          <h3>⭐ Chuỗi danh hiệu Xuất sắc liên tiếp</h3>
-          <p>Duy trì kết quả học tập tốt và liên tục đạt danh hiệu Xuất sắc qua các chặng rèn luyện (giấy khen bản cứng đang lưu giữ).</p>
+          <span class="timeline-badge">BƯỚC 01 · LỚP 1 → LỚP 7 (BẢN CỨNG)</span>
+          <h3>⭐ Liên tục đạt danh hiệu Xuất sắc từ lớp 1 tới hiện tại</h3>
+          <p>Giữ vững phong độ học tập đều đặn và liên tục đạt danh hiệu Xuất sắc suốt từ lớp 1 đến lớp 7 (các giấy khen bản cứng hiện đang lưu giữ).</p>
         </div>
 
         <div class="timeline-item">
           <span class="timeline-badge">BƯỚC 02 · NĂM HỌC 2025–2026 (LỚP 6C)</span>
           <h3>🏅 Đấu trường VioEdu cấp Xã & Chung kết 3 miền</h3>
-          <p>Đạt thành tích <strong>Hoàn thành</strong> vòng cấp Xã/Phường/Đặc khu (Xã Hương Bình, Tỉnh Hà Tĩnh)[cite: 4] và đạt thành tích <strong>Tài năng</strong> ở vòng thi tuyển chọn trực tuyến Chung kết 3 miền VioEdu năm học 2025–2026.</p>
+          <p>Đạt thành tích <strong>Hoàn thành</strong> vòng cấp Xã/Phường/Đặc khu (Xã Hương Bình, Tỉnh Hà Tĩnh) và đạt thành tích <strong>Tài năng</strong> ở vòng thi tuyển chọn trực tuyến Chung kết 3 miền VioEdu năm học 2025–2026.</p>
         </div>
 
         <div class="timeline-item">
           <span class="timeline-badge">BƯỚC 03 · 23/07/2026</span>
           <h3>📊 Hoàn thành 10 lần kiểm tra trên VioEdu</h3>
-          <p>Chứng nhận hoàn thành 10 lần kiểm tra trên hệ thống giáo dục trực tuyến VioEdu vào ngày 23-07-2026[cite: 2].</p>
+          <p>Chứng nhận hoàn thành 10 lần kiểm tra trên hệ thống giáo dục trực tuyến VioEdu vào ngày 23-07-2026.</p>
         </div>
 
         <div class="timeline-item">
           <span class="timeline-badge">BƯỚC 04 · TỰ HỌC CÔNG NGHỆ</span>
           <h3>💻 Xây dựng website cá nhân trên GitHub Pages</h3>
-          <p>Tự tìm hiểu HTML, CSS, JavaScript, làm giao diện công nghệ và đưa trang web cá nhân lên GitHub Pages cùng hộp thư liên hệ.</p>
+          <p>Tự tìm hiểu HTML, CSS, JavaScript, làm hiệu ứng chuyển động & khung tự bung, đưa trang lên GitHub Pages cùng hộp thư liên hệ.</p>
         </div>
 
         <div class="timeline-item">
@@ -1175,17 +1399,17 @@
         </div>
         <div class="faq-item">
           <button class="faq-btn" type="button">
-            <span>📚 Bí quyết ôn luyện VioEdu của tôi là gì?</span>
+            <span>📚 Bí quyết giữ Xuất sắc từ lớp 1 tới lớp 7 & ôn VioEdu?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-body">Tôi thường chia nhỏ thời gian mỗi ngày để làm bài thực hành, ghi chép lại các dạng toán lạ và chủ động trao đổi với thầy cô, bạn bè.</div>
+          <div class="faq-body">Tôi giữ thói quen học đều đặn mỗi ngày, làm bài thực hành cẩn thận, ghi chép lại các dạng toán lạ và chủ động trao đổi với thầy cô, bạn bè.</div>
         </div>
         <div class="faq-item">
           <button class="faq-btn" type="button">
             <span>💻 Tôi học làm trang web này như thế nào?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-body">Tôi tự tìm hiểu cấu trúc HTML, CSS, JavaScript cơ bản và sử dụng GitHub Pages để đưa trang web của mình lên mạng miễn phí.</div>
+          <div class="faq-body">Tôi tự tìm hiểu cấu trúc HTML, CSS, JavaScript và sử dụng GitHub Pages để đưa trang web của mình lên mạng miễn phí.</div>
         </div>
       </div>
     </section>
@@ -1256,6 +1480,29 @@
 
     function isFxActive() {
       return !document.body.classList.contains("fx-off") && !prefersReducedMotion;
+    }
+
+    // 0. Màn hình khởi động Boot Bar
+    const bootScreen = document.getElementById("boot-screen");
+    const bootBarFill = document.getElementById("boot-bar-fill");
+    const bootPct = document.getElementById("boot-pct");
+
+    function runBootScreen() {
+      if (!isFxActive()) {
+        bootScreen.classList.add("hidden");
+        return;
+      }
+      let pct = 0;
+      const timer = setInterval(() => {
+        pct += 20;
+        if (pct > 100) pct = 100;
+        bootBarFill.style.width = pct + "%";
+        bootPct.textContent = pct + "%";
+        if (pct >= 100) {
+          clearInterval(timer);
+          setTimeout(() => bootScreen.classList.add("hidden"), 180);
+        }
+      }, 95);
     }
 
     // 1. Giao diện Sáng/Tối (có lưu localStorage)
@@ -1369,6 +1616,7 @@
       }
       if (isOff || prefersReducedMotion) {
         stopCyberLoop();
+        bootScreen.classList.add("hidden");
       } else {
         startCyberLoop();
       }
@@ -1377,6 +1625,7 @@
     let savedFx = null;
     try { savedFx = localStorage.getItem("nhat_fx"); } catch (_) {}
     applyFx(savedFx ? savedFx === "off" : prefersReducedMotion, false);
+    runBootScreen();
 
     fxBtn.addEventListener("click", () => {
       applyFx(!document.body.classList.contains("fx-off"), true);
@@ -1398,8 +1647,8 @@
     // 5. Typing Effect
     const phrases = [
       "Học sinh lớp 7 · Trường TH&THCS Phúc Đồng",
+      "Xuất sắc từ lớp 1 tới lớp 7 · Tài năng VioEdu",
       "Đam mê Toán học & Công nghệ thông tin",
-      "Mục tiêu: Đấu trường VioEdu Quốc gia",
       "Ước mơ: Công an Công nghệ thông tin"
     ];
     let pIdx = 0, cIdx = 0, isDeleting = false;
@@ -1431,9 +1680,9 @@
     // 6. Khung Terminal tương tác mini
     const cmdResponses = {
       muc_tieu: "▶ Trở thành chiến sĩ Công an làm việc trong lĩnh vực Công nghệ thông tin & An ninh mạng.",
-      thanh_tich: "▶ Xuất sắc (bản cứng) · VioEdu 2025–2026: Tài năng Chung kết 3 miền & Hoàn thành cấp Xã · 10 lần kiểm tra (23/07/2026).",
-      vioedu: "▶ Ôn luyện Toán học mỗi ngày, hướng tới đấu trường VioEdu Quốc gia và danh hiệu Học sinh Xuất sắc lớp 7.",
-      so_thich: "▶ Giải Toán, tự học lập trình HTML/CSS, chơi cờ tư duy và câu cá rèn tính kiên nhẫn.",
+      thanh_tich: "▶ Xuất sắc từ lớp 1 tới lớp 7 (bản cứng) · VioEdu 2025–2026: Tài năng Chung kết 3 miền & Hoàn thành cấp Xã · 10 lần kiểm tra (23/07/2026).",
+      vioedu: "▶ Tài năng Chung kết 3 miền & Hoàn thành cấp Xã (2025–2026), hoàn thành 10 lần kiểm tra (23/07/2026).",
+      so_thich: "▶ Giải Toán, tự học lập trình HTML/CSS/JS, chơi cờ tư duy và câu cá rèn tính kiên nhẫn.",
       lien_he: "▶ Gửi lời nhắn ở mục Hộp thư bên dưới hoặc kết nối qua Facebook: Nguyễn Đức Nhật."
     };
     const termOutput = document.getElementById("term-output");
@@ -1519,12 +1768,22 @@
       setTimeout(() => ripple.remove(), 620);
     });
 
-    // 10. Spotlight cho thẻ Bento
+    // 10. Spotlight + Nghiêng nhẹ 3D cho thẻ Bento
     document.querySelectorAll(".interactive-card").forEach(card => {
       card.addEventListener("mousemove", e => {
         const rect = card.getBoundingClientRect();
-        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+        if (isFxActive() && card.classList.contains("tilt-card")) {
+          const rx = ((y / rect.height) - 0.5) * -6;
+          const ry = ((x / rect.width) - 0.5) * 6;
+          card.style.transform = `perspective(700px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-3px)`;
+        }
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
       });
     });
 
